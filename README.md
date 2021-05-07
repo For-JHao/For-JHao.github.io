@@ -1,2 +1,2 @@
-# For-JHao.github.io
+# For-JHao.io
 my blog
