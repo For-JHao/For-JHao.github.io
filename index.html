@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body >
+    <div class="wrapper">
+        <div class="intro" id="intro">
+            <div >
+            <h1 id="title">
+                WELCOME HERE <br>
+                My Blog
+            </h1>
+            <p style="font-size: large;">Act as if what you do makes a difference. </p>
+            <a href="https://github.com/For-JHao/For-JHao.github.io">Click here to my github</a>
+            </div>
+        </div>
+        <header>
+            <div id="hd1" onclick="headerCheck(this.id)" style="background-color: white;color:black;">Note</div>
+            <div id="hd2" onclick="headerCheck(this.id)">life</div>
+            <div id="hd3" onclick="headerCheck(this.id)">discuss</div>
+        </header>
+        <nav>
+            <div>Vue</div>
+            <div>JavaScript</div>
+            <div>CSS</div>
+            <div>HTML</div>  
+        </nav>
+        <main>
+            <article>Working</article>
+            <article>Working</article>
+        </main>
+        <footer>
+            <ul>
+                <li>author：JHao</li>
+                <li>Tel：13880321621</li>
+                <li>Email：for-JHao@outlook.com</li>
+            </ul>
+        </footer>
+    </div>
+</body>
+<script>
+    //初始化intro区域高度
+    let headerHeight=60;
+    let borderHeight=document.documentElement.clientHeight;
+    borderHeight>500? borderHeight:borderHeight=500;
+    let introStyle=document.getElementById('intro').style;
+    introStyle.height=`${borderHeight}px`;
+ 
+    //body背景动画
+    setTimeout(function(){
+        //界面淡入
+        document.getElementsByTagName("body")[0].style.opacity="1";
+        document.getElementsByTagName("body")[0].style.transition="all 1s ease-out";
+        //header上升
+        introStyle.transition="height 0.75s ease-out";
+        for(let h=0;h<headerHeight;h++){
+            introStyle.height=`${borderHeight--}px`;
+        }
+    },100)
+    
+    //header目录的样式切换
+    let headerCheck=function(id){
+        let target=document.getElementById(id).style;
+        target.backgroundColor= 'white';
+        target.color='black';
+         let headDiv=document.getElementsByTagName('header')[0].children;
+        for(let i =0;i<headDiv.length;i++){
+          if(headDiv[i].id!=id){
+              console.log(headDiv[i].style)
+            headDiv[i].style.backgroundColor=null;//必须设为null,否则hover失效
+            headDiv[i].style.color='white';
+          }
+        }
+        //通过class headChoose操作样式切换，会被hover样式覆盖
+        // document.getElementById(id).setAttribute("class","headChoose")
+        // let headDiv=document.getElementsByTagName('header')[0].children;
+        // for(let i =0;i<headDiv.length;i++){
+        //     if(headDiv[i].id!=id){
+        //         headDiv[i].setAttribute("class",null)
+        //     }
+        // }
+    }
+
+
+</script>
+<style >
+    html{
+        margin: 0;
+        padding: 0;
+
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        background: url(./img/beach.jpg) no-repeat center 0;
+        background-attachment: fixed;
+        opacity: 0;
+    }
+
+    /* 通过伪元素设置背景模糊 */
+    body::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background:inherit;
+        filter: blur(2px);
+    }
+
+    .wrapper {
+        display: grid;
+        position: relative;
+        grid-template-columns: 1fr minmax(40px, 250px) minmax(100px, 900px) 1fr;
+        grid-template-rows: 1fr 60px 1fr 60px;
+        grid-template-areas: "intro intro intro intro"
+            ". header header ."
+            ". nav main ."
+            ". footer footer .";
+    }
+
+    .intro {
+        grid-area: intro;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 2px;
+    }
+
+    header {
+        grid-area: header;
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        align-items: center;
+        justify-items: center;
+        background-color: rgba(255, 255, 255, 0.144);
+    }
+    header div{
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        line-height: 60px;
+        color: white;
+        cursor: pointer;
+    }
+    header div:hover{
+        background-color: rgba(255, 255, 255, 0.342);
+    }
+ 
+    nav,main{
+        background-color: white;
+    }
+    nav{
+        grid-area: nav;
+        border-right:rgb(215, 218, 216) 2px solid;
+        display: grid;
+        grid-template-rows: repeat(4,60px);
+    }
+    nav div{
+        text-align:center;
+        line-height: 60px;
+        border-bottom:rgb(215, 218, 216) 2px solid;
+    }
+    nav div:hover{
+        color: rgb(238, 176, 134);
+    }
+    main {
+        grid-area: main;
+        display: grid;
+        grid-template-columns: repeat(2,minmax(100px,500px));
+    }
+    main article{
+        border-bottom:rgb(215, 218, 216) 2px solid;
+        border-right: rgb(215, 218, 216) 2px solid;
+    }
+    footer {
+        grid-area: footer;
+        background-color: #f5f5f5;
+    }
+    footer ul{
+        display:flex;
+        justify-content: space-evenly;
+    }
+    #title{
+        color: white;
+        font-size: 60px;
+        margin-top: 0;
+    }
+</style>
+
+</html>
