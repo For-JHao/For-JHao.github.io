@@ -21,17 +21,12 @@
             </div>
         </div>
         <header>
-            <div id="hd1" onclick="headerCheck(this.id)" style="background-color: white;color:black;">MyTravel</div>
-            <div id="hd2" onclick="headerCheck(this.id)">life</div>
-            <div id="hd3" onclick="headerCheck(this.id)">discuss</div>
+            <div id="MyTravel" onclick="headerCheck(this.id)" style="background-color: white;color:black;">MyTravel</div>
+            <div id="life" onclick="headerCheck(this.id)">life</div>
+            <div id="review" onclick="headerCheck(this.id)">review</div>
         </header>
-        <main>
-            <!-- <div class="board">Working</div>
-            <article>
-                <div>1</div>
-                <div>3</div>
-            </article> -->
-            <iframe id="MyTravel" src="MyTravel.html" frameborder="0" height="100%" width="100%"
+        <main id="main">
+            <iframe id="iframe" src="MyTravel.html" frameborder="0" height="100%" width="100%"
                 onLoad="iFrameHeight()"></iframe>
         </main>
         <footer>
@@ -66,15 +61,23 @@
         }
     }, 100)
 
-    //header目录的样式切换
+    //header目录切换
     let headerCheck = function (id) {
+        changeHeaderStyle(id);
+        let iframeDom=document.getElementById('iframe')
+        let srcStr=iframeDom.src;
+        let srcArray=srcStr.split('/');
+        iframeDom.src=srcStr.replace(srcArray[srcArray.length-1],`${id}.html`)
+        // iframeDom.contentWindow.onload()  
+    };
+    //header的样式切换
+    function changeHeaderStyle(id){
         let target = document.getElementById(id).style;
         target.backgroundColor = 'white';
         target.color = 'black';
         let headDiv = document.getElementsByTagName('header')[0].children;
         for (let i = 0; i < headDiv.length; i++) {
             if (headDiv[i].id != id) {
-                console.log(headDiv[i].style)
                 headDiv[i].style.backgroundColor = null;//必须设为null,否则hover失效
                 headDiv[i].style.color = 'white';
             }
@@ -87,13 +90,15 @@
         //         headDiv[i].setAttribute("class",null)
         //     }
         // }
-    }
+    };
+
 
     //intro title面板的滑动动画
+{
     let introTitle = document.getElementsByClassName('introTitle')[0].style;
     introTitle.transition = "paddingTop 0.75s ease-out";
     let sign = 0;
-    window.addEventListener('scroll', titleAnimationByScroll);
+    window.addEventListener('scroll', titleAnimationBySite);
 
     //两种动画效果
     function titleAnimationByScroll() {
@@ -126,22 +131,28 @@
             sign = 0;
         }
     };
+}
+    //获取iframe高度，手动撑开父级div高
 
-    //获取iframe搞得，手动撑开父级div高度
-
-    //iframe内容异步加载，无法在这直接获取iframe高度
+    /*
+    iframe内容异步加载，无法在这直接获取iframe高度
     let iframeHeight=document.getElementById('MyTravel').contentDocument.body.scrollHeight
-    console.log(iframeHeight)//150px；似乎为chrome下iframe的初始默认高度
+    console.log(iframeHeight)        //150px；似乎为chrome下iframe的初始默认高度
+    */
 
     function iFrameHeight() {
-        var ifm = document.getElementById("MyTravel");
-        var subWeb = document.frames ? document.frames["MyTravel"].document :
-            ifm.contentDocument;
-        if (ifm != null && subWeb != null) {
-            ifm.height = subWeb.body.scrollHeight;
-        }
-        console.log(document.getElementById("MyTravel").contentDocument.body.scrollHeight)
-    }
+        let iframeHeight=document.getElementById('iframe').contentDocument.body.scrollHeight
+        let mainStyle=document.getElementById('main').style
+        mainStyle.height=`${iframeHeight}px`;
+
+        // 如果要使IE6，IE7支持：
+        // var ifm = document.getElementById("MyTravel");
+        // var subWeb = document.frames ? document.frames["MyTravel"].document :
+        //     ifm.contentDocument;
+        // if (ifm != null && subWeb != null) {
+        //     ifm.height = subWeb.body.scrollHeight;
+        // }
+    };
 
 
 </script>
@@ -176,7 +187,7 @@
         display: grid;
         position: relative;
         grid-template-columns: 1fr minmax(100px, 1150px) 1fr;
-        grid-template-rows: 1fr 60px 1fr 60px;
+        grid-template-rows: 1fr 60px auto 60px;
         grid-template-areas: "intro intro intro"
             ". header ."
             ". main ."
@@ -218,37 +229,6 @@
         background-color: white;
         grid-area: main;
     }
-
-    /* main {
-        background-color: white;
-        grid-area: main;
-        display: grid;
-        grid-template-rows: 500px 1fr;
-    }
-
-    .board {
-        display: flex;
-        justify-content: center;
-        align-items: center
-    }
-
-    main article {
-        border-top: rgb(215, 218, 216) 2px solid;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    article>div {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    article>div:nth-of-type(odd) {
-        border-right: rgb(215, 218, 216) 2px solid;
-    } */
 
     footer {
         grid-area: footer;
