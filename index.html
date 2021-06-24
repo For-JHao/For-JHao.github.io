@@ -11,8 +11,8 @@
 <body>
     <div class="wrapper">
         <div class="intro" id="intro">
-            <div class="introTitle">
-                <h1 id="title">
+            <div  id="introTitle" >
+                <h1 id="title" class="backSite">
                     WELCOME HERE <br>
                     My Blog
                 </h1>
@@ -95,11 +95,11 @@
 
     //intro title面板的滑动动画
 {
-    let introTitle = document.getElementsByClassName('introTitle')[0].style;
-    introTitle.transition = "paddingTop 0.75s ease-out";
+    // let introTitle = document.getElementsByClassName('introTitle')[0].style;
+    // introTitle.transition = "paddingTop,opacity 0.75s,1s ease-out";
+    // console.log(introTitle)
     let sign = 0;
     window.addEventListener('scroll', titleAnimationBySite);
-
     //两种动画效果
     function titleAnimationByScroll() {
         if (window.scrollY < 200) {
@@ -115,22 +115,19 @@
             introTitle.opacity = 0;
         }
     };
+    
     function titleAnimationBySite() {
-        if (window.scrollY > 100 && sign == 0) {
-            for (let h = 0; h < 150; h++) {
-                introTitle.paddingTop = `${h}px`;
-                introTitle.opacity = (1 - h / 150);
-            };
-            sign = 1;
+        if (sign == 0 && window.scrollY > 100) {
+            document.getElementById("introTitle").className="changeSite";
+            sign=1
         };
-        if (window.scrollY < 250 && sign == 1) {
-            for (let h = 150; h > 0; h--) {
-                introTitle.paddingTop = `${h}px`;
-                introTitle.opacity = (1 - h / 150);
-            };
-            sign = 0;
+        if(sign==1&&window.scrollY<100){
+            document.getElementById("introTitle").className="backSite";
+            sign=0;
         }
-    };
+        
+        
+    }; 
 }
     //获取iframe高度，手动撑开父级div高
 
@@ -139,7 +136,6 @@
     let iframeHeight=document.getElementById('MyTravel').contentDocument.body.scrollHeight
     console.log(iframeHeight)        //150px；似乎为chrome下iframe的初始默认高度
     */
-
     function iFrameHeight() {
         let iframeHeight=document.getElementById('iframe').contentDocument.body.scrollHeight
         let mainStyle=document.getElementById('main').style
@@ -202,7 +198,16 @@
         text-align: center;
         letter-spacing: 2px;
     }
-
+    .backSite{
+        transition: opacity,padding-top 1s ease-out;
+        padding-top: 0;
+        opacity: 1;
+    }
+    .changeSite{
+        transition: all 1s ease-out;
+        padding-top: 200px;
+        opacity: 0;
+    }
     header {
         grid-area: header;
         display: grid;

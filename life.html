@@ -11,7 +11,9 @@
 <body>
     <main>
         <div class="title">
-            recall
+           <h1>
+               Recall
+           </h1> 
         </div>
         <div class="content">
             I still remenber the first time I learn to ride a bicycle...
@@ -29,10 +31,16 @@
         height: 400px;
         display: grid;
         grid-template-rows: 100px 1fr;
+        grid-template-columns: 1fr minmax(900px,1200px) 1fr;
+        grid-template-areas: ". title ."
+                            ". content .";
+        justify-items: center;
     }
     .title{
-        justify-items: center;
-        align-items: center;
+        grid-area:title;
+    }
+    .content{
+        grid-area:content;
     }
 </style>
 
