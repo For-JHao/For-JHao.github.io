@@ -101,6 +101,17 @@
     let sign = 0;
     window.addEventListener('scroll', titleAnimationBySite);
     //两种动画效果
+    function titleAnimationBySite() {
+        if (sign == 0 && window.scrollY > 100) {
+            document.getElementById("introTitle").className="changeSite";
+            sign=1
+        };
+        if(sign==1&&window.scrollY<100){
+            document.getElementById("introTitle").className="backSite";
+            sign=0;
+        }  
+    }; 
+    
     function titleAnimationByScroll() {
         if (window.scrollY < 200) {
             introTitle.paddingTop = "0px";
@@ -116,21 +127,8 @@
         }
     };
     
-    function titleAnimationBySite() {
-        if (sign == 0 && window.scrollY > 100) {
-            document.getElementById("introTitle").className="changeSite";
-            sign=1
-        };
-        if(sign==1&&window.scrollY<100){
-            document.getElementById("introTitle").className="backSite";
-            sign=0;
-        }
-        
-        
-    }; 
 }
     //获取iframe高度，手动撑开父级div高
-
     /*
     iframe内容异步加载，无法在这直接获取iframe高度
     let iframeHeight=document.getElementById('MyTravel').contentDocument.body.scrollHeight
@@ -199,13 +197,16 @@
         letter-spacing: 2px;
     }
     .backSite{
-        transition: opacity,padding-top 1s ease-out;
+        transition-property: opacity,padding-top;
+        transition-duration: 0.75s;
+        transition-timing-function: ease-in;
+        /* transition: opacity,padding-top 1s ease-out; */
         padding-top: 0;
         opacity: 1;
     }
     .changeSite{
         transition: all 1s ease-out;
-        padding-top: 200px;
+        padding-top: 150px;
         opacity: 0;
     }
     header {

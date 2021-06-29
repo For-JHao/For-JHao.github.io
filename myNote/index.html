@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <nav>
+            <div class="search">
+                <input type="search"/>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li onclick="showInnerUl('1')">1
+                        <ul class="innerUl" id='1'>
+                            <li>11</li>
+                            <li>12</li>
+                            <li>13</li>
+                        </ul>
+                    </li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
+        </nav>
+        <section>
+            <article>
+                <h1>JavaScript for es6</h1>
+                <p>
+                    this is a learning note 
+                    <br>
+                    <input type="file" name="test" id="test">
+                    <textarea name="content" id="content">111</textarea>
+                </p>
+            </article>
+        </section>
+    </main>
+
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/marked/2.1.3/marked.js"></script>
+<script>
+    //复合菜单展开
+    let ulShowSign=0;
+    function showInnerUl(id){
+        if(ulShowSign){
+            document.getElementById(id).className='innerUl';
+            ulShowSign=0;
+        }
+        else {
+            document.getElementById(id).className='innerUlShow';
+            ulShowSign=1;
+        }
+    };
+
+    document.getElementsByTagName('article')[0].innerHTML=marked()
+</script>
+<style>
+    html,body{
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    main{
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        height: 100%;
+    }
+    nav {
+        background-color: #f5f6f7;
+    }
+    .search{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        background-color: #eff1f2;
+    }
+    .search>input{
+        height: 30px; 
+        width: 80%;
+        border: 1px solid black;
+        border-radius: 30px;
+        outline: none;
+        padding-left: 14px;
+    }
+    .menu{
+        width: 100%;
+    }
+    .menu>ul{
+        list-style-type: none;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    .menu>ul>li{
+        padding-top: 20px;
+        border-bottom: 2px solid #eff1f2;
+        padding-bottom: 10px;
+    }
+    section{
+        display: flex;
+        justify-content: center;
+        padding: 50px;
+    }
+    .selectStyle{
+        background-color: transparent;
+        border: 0;
+        width: 100%;
+    }
+    .innerUl{
+        display: none;
+    }
+    .innerUlShow{
+        display: block;
+        list-style-type: none;
+    }
+    .innerUlShow>li{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: rgb(131, 127, 127);
+    }
+</style>
+
+</html>
