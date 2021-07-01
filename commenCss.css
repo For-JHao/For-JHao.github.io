@@ -1,0 +1,15 @@
+.flexCenterCss{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.flexBetweenCss{
+    display: flex;
+    justify-content: space-between;
+}
+.ulHorizontalCss{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
