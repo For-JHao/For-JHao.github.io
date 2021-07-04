@@ -22,3 +22,5 @@ body使用opacity，会导致全局淡入；
 解决方案：
 1.	通过操作增删同一个class修改样式，不会有相同参数渲染不同的情况，但hover的效果会覆盖class；
 2.	使用style，每次切换样式时把多余的行内样式清空，且行内样式优先级比hover高（不会被hover覆盖）。如，使background-color=null，使其继承父级css而不是手动设置相同颜色;
+
+

@@ -18,14 +18,15 @@
             <div class="menu">
                 <ul>
                     <li><a href="../index.html">Home</a></li>
-                    <li onclick="readMdfile('./note/welcome.md')"> First</li>
-                    <li onclick="readMdfile('./note/problemsRecord.md')">Problems</li>
-                    <li onclick="showInnerUl('1')">
-                        2
-                        <ul class="innerUl" id='1'>
-                            <li>11</li>
-                            <li>12</li>
-                            <li>13</li>
+                    <li onclick="readMdfile('./note/learningNotes/JavaScript.md')"> JavaScript</li>
+                    <li onclick="readMdfile('./note/learningNotes/vue.md')"> Vue</li>
+                    <li onclick="readMdfile('./note/learningNotes/html5.md')"> Html5</li>
+                    <li onclick="readMdfile('./note/learningNotes/css3.md')"> Css3</li>
+                    <li onclick="showInnerUl('1')" id='2'>
+                        Problems
+                        <ul class="innerUl" id='1' onclick="stopTest()">
+                            <li onclick="readMdfile('./note/problemsRecord/indexProblem.md')">index.html</li>
+                            <li onclick="readMdfile('./note/problemsRecord/notesHomeProblem.md')">notesHome</li>
                         </ul>
                     </li>
                 </ul>
@@ -33,7 +34,6 @@
         </nav>
         <section>
             <header class="artHeader">
-                
                 <div>JHao</div>
                 <div>2</div>
             </header>
@@ -62,6 +62,7 @@
 
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/marked/2.1.3/marked.js"></script>
+<script src="../for-jhao.js"></script>
 <script>
     //复合菜单展开
     let ulShowSign = 0;
@@ -85,6 +86,7 @@
             document.getElementsByTagName('article')[0].innerHTML = marked(xhr.responseText)
         }
     }
+
 
 
 </script>
@@ -125,7 +127,6 @@
 
     .menu {
         width: 100%;
-        height: 1000px;
     }
 
     .menu>ul {
@@ -161,12 +162,9 @@
         width: 100%;
     }
 
-    /* article{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    } */
+    article{
+        padding-top: 40px;
+    }
     .artHeader {
         width: 100%;
         border-bottom: 4px solid #f56a6a;
