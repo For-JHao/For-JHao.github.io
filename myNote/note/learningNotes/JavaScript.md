@@ -17,7 +17,7 @@ console.log(test)//undefined，not error
 
 - 当前顶级作用域可以是全局作用域，或函数作用域；
 
-- 函数作用域中的var声明不会提升全局，想要访问函数作用域变量只能return（给上级），或闭包特性（给下级函数）
+- 函数，包括箭头函数，作用域中的var声明不会提升全局，想要访问函数作用域变量只能return（给上级），或闭包特性（给下级函数）
 
 ```javascript
 var tmp = new Date();
@@ -74,3 +74,6 @@ console.log(a)	//1
 console.log(b)	//undefined
 ```
 
+## 立即执行函数
+
+立即执行函数前
