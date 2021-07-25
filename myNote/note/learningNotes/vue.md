@@ -26,3 +26,23 @@ data函数中尝试获取当前组件元素dom，失败；
 
 ![1.3](https://github.com/For-JHao/For-JHao.github.io/blob/main/myNote/note/learningNotes/img/js/1.3%202021-07-17.png?raw=true)
 
+
+
+## slot-scope
+
+作用域插槽中，v-if或v-show无法监听继承变量的变化，来动态地渲染元素，只在初始页面加载时进行判断渲染。
+
+
+
+
+
+## $refs
+
+当使用变量控制要调用的命名组件时，不能使用点语法，否子会将变量名当作是要查找的组件，可以使用方括号写法。
+
+```javascript
+let a="compount"//存在一个已注册的为compount的组件
+console.log(this.$refs.a)//undefine
+this.$refs[a]//找到
+```
+
