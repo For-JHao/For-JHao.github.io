@@ -2,11 +2,9 @@
 
 ## 生命周期
 
-附上官网的图示
+官网图示
 
-![vue](https://cn.vuejs.org/images/lifecycle.png)
-
-
+<img src='https://cn.vuejs.org/images/lifecycle.png' width='60%'/>
 
 ### data函数的执行节点
 
