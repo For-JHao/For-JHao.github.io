@@ -44,3 +44,17 @@ console.log(this.$refs.a)//undefine
 this.$refs[a]//找到
 ```
 
+
+
+## data()
+
+获取当前状态下的data：this.$data；
+
+获取初始状态data：this.$options.data()；
+
+
+
+重置组件data：
+
+Object.assign(this.$data, this.$options.data())
+
