@@ -58,3 +58,19 @@ this.$refs[a]//找到
 
 Object.assign(this.$data, this.$options.data())
 
+
+
+## 组件
+
+父子组件传值：
+
+- **v-bind="$props"** ：可以将本组件接收到的所有props，传递给使用了**v-bind="$props"**的的子组件，子组件中同样需使用props声明需要的数据。
+- **v-on="$listeners"** ：将本组件的自定义方法全部向子组件传递，使子组件可以直接通过this.$emit()调用
+
+
+
+## 响应式原理
+
+### Observer
+
+注意：observer包裹的空对象以 =='  ' 判断并不为空。可以借助**hasOwnProperty**检测检测某个具体属性

@@ -6,6 +6,15 @@
 
 圆角边框：border-radius；可设置绝对值和百分比；
 
+```css
+border-radius: 1em/5em;
+/* 等价于： */
+border-top-left-radius:     1em 5em;
+border-top-right-radius:    1em 5em;
+border-bottom-right-radius: 1em 5em;
+border-bottom-left-radius:  1em 5em;
+```
+
 去除外边框：outline：none;
 
 
