@@ -113,6 +113,26 @@ curryingAdd(1)(2)   // 3
 
 
 
+## 变量
+
+注意：
+
+字符串的空格是有值的；(即，空白字符)	
+
+```javascript
+let a="";
+let b=" ";
+console.log(a==b);//false
+console.log(!a);//true
+console.log(!b);//false
+//但是，在进行非严格相等判断时（==），“ ”依然等于false
+console.log(b==false)//true
+```
+
+
+
+
+
 
 
 
