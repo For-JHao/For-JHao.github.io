@@ -73,4 +73,5 @@ Object.assign(this.$data, this.$options.data())
 
 ### Observer
 
-注意：observer包裹的空对象以 =='  ' 判断并不为空。可以借助**hasOwnProperty**检测检测某个具体属性
+注意：observer包裹的空对象以 =='  ' 判断并不为空。可以借助**hasOwnProperty**检测某个具体属性
+
