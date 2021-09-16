@@ -111,6 +111,8 @@ curryingAdd(1)(2)   // 3
 
 也可以借助函数回调，给封装好的外层函数（接收固定参数），添加额外参数再封装；
 
+> JavaScript中，函数若没有使用return，将自动返回undefined
+
 
 
 ## 变量
@@ -131,7 +133,7 @@ console.log(b==false)//true
 
 
 
-
+## 内存回收机制**
 
 
 
