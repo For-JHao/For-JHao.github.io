@@ -117,6 +117,8 @@ curryingAdd(1)(2)   // 3
 
 ## 变量
 
+### 空白字符
+
 注意：
 
 字符串的空格是有值的；(即，空白字符)	
@@ -130,6 +132,20 @@ console.log(!b);//false
 //但是，在进行非严格相等判断时（==），“ ”依然等于false
 console.log(b==false)//true
 ```
+
+
+
+### Number的数字检测
+
+Number.isFinite()：检测一个变量是否是数值，且是否是有限数。
+
+优势：不会进行参数的类型转换。仅数字返回ture，Infinity、NaN、‘0’、null、undefined均返回false;
+
+*注意*：
+
+- 全局的isFinite()函数，会将数字字符串和null转换为数值判断；
+
+- NaN和Infinity是特殊的数值类型，使用全局函数typeOf()判断类型，均为Number；
 
 
 
