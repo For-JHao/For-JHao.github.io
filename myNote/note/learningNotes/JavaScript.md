@@ -149,6 +149,18 @@ Number.isFinite()：检测一个变量是否是数值，且是否是有限数。
 
 
 
+### 字符遍历
+
+字符串可以使用for循环遍历，不能直接使用forEach等方法
+
+```javascript
+let a="abc";
+for(let i in a) console.log(i)//0,1,2
+for(let i of a) console.log(i)//a,b,c
+```
+
+
+
 ## 内存回收机制**
 
 
