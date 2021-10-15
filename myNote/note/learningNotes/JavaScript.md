@@ -159,6 +159,8 @@ for(let i in a) console.log(i)//0,1,2
 for(let i of a) console.log(i)//a,b,c
 ```
 
+同样对于数组，for in 遍历角标，for of遍历数值
+
 
 
 ## 内存回收机制**
