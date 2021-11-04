@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../commenCss.css">
+    <link rel="stylesheet" href="./myElement.css">
     <title>Document</title>
 </head>
 
@@ -17,41 +18,58 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li onclick="readMdfile('./note/learningNotes/JavaScript.md')"> JavaScript</li>
-                    <li onclick="readMdfile('./note/learningNotes/vue.md')"> Vue</li>
-                    <li onclick="readMdfile('./note/learningNotes/html5.md')"> Html5</li>
-                    <li onclick="readMdfile('./note/learningNotes/css3.md')"> Css3</li>
-                    <li onclick="showInnerUl('1')" id='2'>
-                        Problems
-                        <ul class="innerUl" id='1' onclick="stopTest()">
-                            <li onclick="readMdfile('./note/problemsRecord/indexProblem.md')">index.html</li>
-                            <li onclick="readMdfile('./note/problemsRecord/notesHomeProblem.md')">notesHome</li>
+                    <myNav><a href="../index.html">Home</a></myNav>
+                    <myNav><span>JavaScript</span> 
+                        <ul class="innerUl">
+                            <li onclick="readMdfile('./note/learningNotes/JavaScript/变量.md')">变量</li>
+                            <li onclick="readMdfile('./note/learningNotes/JavaScript/函数.md')">函数</li>
+                            <li onclick="readMdfile('./note/learningNotes/JavaScript/事件.md')">事件</li>
                         </ul>
-                    </li>
+                    </myNav>
+                    <myNav><span>VUE</span> 
+                        <ul class="innerUl">
+                            <li onclick="readMdfile('./note/learningNotes/vue/vue.md')">Vue</li>
+                        </ul>
+                    </myNav>
+                    <myNav><span>Html</span> 
+                        <ul class="innerUl">
+                            <li onclick="readMdfile('./note/learningNotes/HTML/语义化.md')">语义化</li>
+                            <li onclick="readMdfile('./note/learningNotes/HTML/DOM.md')">DOM</li>
+                            <li onclick="readMdfile('./note/learningNotes/HTML/Iframe.md')">Iframe</li>
+                        </ul>
+                    </myNav>
+                    <myNav><span>Css</span> 
+                        <ul class="innerUl">
+                            <li onclick="readMdfile('./note/learningNotes/css/属性.md')">属性</li>
+                            <li onclick="readMdfile('./note/learningNotes/css/grid.md')">grid</li>
+                        </ul>
+                    </myNav>
+                    <myNav onclick="readMdfile('./note/learningNotes/计算机原理.md')">计算机原理</myNav>
+                    <myNav onclick="readMdfile('./note/learningNotes/浏览器运行原理.md')">浏览器运行原理</myNav>
+                    <myNav onclick="readMdfile('./note/learningNotes/webpack.md')">webpack</myNav>
                 </ul>
             </div>
         </nav>
         <section>
             <header class="artHeader">
                 <div>JHao</div>
-                <div>2</div>
+                <div>icon</div>
             </header>
             <article>
-                <div class="flexBetweenCss">
-                    <div class="flexCenterCss" style="flex-direction: column;">
-                    <h1>JHao</h1>
-                    <p>
-                        My learning notes
-                        <br>
-                    </p>
+                <div class="comFlexBetween">
+                    <div class="comFlexCenter" style="flex-direction: column;">
+                        <h1>JHao</h1>
+                        <p>
+                            My learning notes
+                            <br>
+                        </p>
                     </div>
                     <img src="../img/dog.jpg" alt="dog" width="70%" height="100%">
                 </div>
-                
+
             </article>
             <footer>
-                <ul class="ulHorizontalCss">
+                <ul class="comUlHorizontal">
                     <li>author：JHao</li>
                     <li>Tel：13880321621</li>
                     <li>Email：for-JHao@outlook.com</li>
@@ -62,20 +80,8 @@
 
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/marked/2.1.3/marked.js"></script>
-<script src="../for-jhao.js"></script>
+<script src="./notesHome.js"></script>
 <script>
-    //复合菜单展开
-    let ulShowSign = 0;
-    function showInnerUl(id) {
-        if (ulShowSign) {
-            document.getElementById(id).className = 'innerUl';
-            ulShowSign = 0;
-        }
-        else {
-            document.getElementById(id).className = 'innerUlShow';
-            ulShowSign = 1;
-        }
-    };
 
     //利用XMLHttpRequest读取md文件
     function readMdfile(filePath) {
@@ -85,6 +91,7 @@
         xhr.onload = function () {
             document.getElementsByTagName('article')[0].innerHTML = marked(xhr.responseText)
         }
+        return false
     }
 
 
@@ -129,7 +136,7 @@
         width: 100%;
     }
 
-    .menu>ul {
+    /* .menu>ul {
         list-style-type: none;
         padding-right: 20px;
         padding-left: 20px;
@@ -145,7 +152,7 @@
     .menu>ul>li>a {
         text-decoration: none;
         color: black;
-    }
+    } */
 
     section {
         padding: 50px;
@@ -162,9 +169,10 @@
         width: 100%;
     }
 
-    article{
+    article {
         padding-top: 40px;
     }
+
     .artHeader {
         width: 100%;
         border-bottom: 4px solid #f56a6a;
@@ -173,6 +181,7 @@
         justify-content: space-between;
         padding-bottom: 40px;
     }
+
     .innerUl {
         display: none;
     }
@@ -187,7 +196,6 @@
         padding-bottom: 5px;
         color: rgb(131, 127, 127);
     }
-
 </style>
 
 </html>

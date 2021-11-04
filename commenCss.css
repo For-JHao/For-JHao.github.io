@@ -1,13 +1,13 @@
-.flexCenterCss{
+.comFlexCenter{
     display:flex;
     justify-content: center;
     align-items: center;
 }
-.flexBetweenCss{
+.comFlexBetween{
     display: flex;
     justify-content: space-between;
 }
-.ulHorizontalCss{
+.comUlHorizontal{
     list-style-type: none;
     padding: 0;
     display: flex;
