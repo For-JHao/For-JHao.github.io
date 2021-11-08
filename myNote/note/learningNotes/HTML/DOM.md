@@ -18,6 +18,13 @@ Document Object Model——文档对象模型;
 
 创建标签：document.createElement();
 
-添加节点：domFather.appendChild();
+添加节点：nodeFather.appendChild();
 
-删除：domFather.removeChild();（不能自我删除）
+删除：nodeFather.removeChild();（不能自我删除）
+
+
+
+解析元素并插入：domObj.insertAdjacentHTML()；
+
+*仅插入，比innerHTML（销毁再插入）更快*
+
