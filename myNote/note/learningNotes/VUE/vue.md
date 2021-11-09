@@ -75,3 +75,29 @@ Object.assign(this.$data, this.$options.data())
 
 注意：observer包裹的空对象以 =='  ' 判断并不为空。可以借助**hasOwnProperty**检测某个具体属性
 
+
+
+## css引入
+
+vue中引入有三种方式：
+
+1. HTML中通过标签Link引入：
+
+```html
+<link rel="stylesheet" href="./myCss.css">
+```
+
+2. vue组件中通过import导入：
+
+```vue
+import "./myCss.css";
+//该方式无法限制css作用域，即全局有效；
+```
+
+3. vue组件中通过标签style引入：
+
+```vue
+<style scoped src='./myCss.css'>
+//可以通过添加scoped属性限制css在当前组件内有效
+```
+
