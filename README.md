@@ -1,6 +1,7 @@
 # For-JHao.io
 My blog
 gogogo
+<a>https://for-jhao.github.io/</a>
 
 # Introduction 
 This is a my Blog based on responsive design;
