@@ -6,6 +6,18 @@
 
 <img src='https://cn.vuejs.org/images/lifecycle.png' width='60%'/>
 
+created：指创建Vue实例（vue对象，包含data，方法，监听事件等）；
+
+mounted：指将Vue实例挂载到指定的元素上（联系实例和DOM，元素即el）；
+
+updated：更新DOM；
+
+destroyed：销毁，清除Vue实例和DOM的联系；
+
+以上均是指事件结束状态
+
+
+
 ### data函数的执行节点
 
 vue组件的data函数执行在created之前，beforeCreated之后：
@@ -20,9 +32,27 @@ data函数中尝试获取当前组件元素dom，失败；
 
 ![js-1.2 2021-07-17](https://github.com/For-JHao/For-JHao.github.io/blob/main/myNote/note/learningNotes/img/js/1.2%202021-07-17.png?raw=true)
 
-在不同时间节点获取当前dom，到mounted才能拿到
+在不同时间节点获取**当前dom**，到**mounted**才能拿到
 
 ![1.3](https://github.com/For-JHao/For-JHao.github.io/blob/main/myNote/note/learningNotes/img/js/1.3%202021-07-17.png?raw=true)
+
+
+
+## 子组件周期节点
+
+**加载**
+
+...父beforeMount ->（子beforeCreate -> mounted） -> 父mounted...
+
+**更新**
+
+...父beforUpdate -> （子beforeUpdate -> updated）-> 父updated...
+
+**销毁**
+
+...父beforeDestroy -> （子beforeDestroy -> destroyed）-> 父destroyed...
+
+
 
 
 
