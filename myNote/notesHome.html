@@ -17,27 +17,34 @@
                 <input type="search" />
             </div>
             <div class="menu">
-                <myNav><a href="../index.html">Home</a></myNav>
-                <myNav><span>JavaScript</span>
+                <myNav><a href="../index.html">Welcome</a></myNav>
+                <myNav>
+                    <div class="myNav_1">JavaScript<div class="arrowDown"></div>
+                    </div>
                     <ul class="innerUl">
                         <li onclick="readMdfile('./note/learningNotes/JavaScript/变量.md')">变量</li>
                         <li onclick="readMdfile('./note/learningNotes/JavaScript/函数.md')">函数</li>
                         <li onclick="readMdfile('./note/learningNotes/JavaScript/事件.md')">事件</li>
                     </ul>
                 </myNav>
-                <myNav><span>VUE</span>
+                <myNav>
+                    <div class="myNav_1">VUE<div class="arrowDown"></div></div>
                     <ul class="innerUl">
                         <li onclick="readMdfile('./note/learningNotes/vue/vue.md')">Vue</li>
+                        <li onclick="readMdfile('./note/learningNotes/vue/源码.md')">运行原理</li>
                     </ul>
                 </myNav>
-                <myNav><span>Html</span>
+                <myNav>
+
+                    <div class="myNav_1">Html<div class="arrowDown"></div></div>
                     <ul class="innerUl">
                         <li onclick="readMdfile('./note/learningNotes/HTML/语义化.md')">语义化</li>
                         <li onclick="readMdfile('./note/learningNotes/HTML/DOM.md')">DOM</li>
                         <li onclick="readMdfile('./note/learningNotes/HTML/Iframe.md')">Iframe</li>
                     </ul>
                 </myNav>
-                <myNav><span>Css</span>
+                <myNav>
+                    <div class="myNav_1">Css<div class="arrowDown"></div></div>
                     <ul class="innerUl">
                         <li onclick="readMdfile('./note/learningNotes/css/属性.md')">属性</li>
                         <li onclick="readMdfile('./note/learningNotes/css/grid.md')">grid</li>
@@ -49,12 +56,12 @@
                 <myNav onclick="readMdfile('./note/learningNotes/webpack.md')">webpack</myNav>
             </div>
         </nav>
-        <section>
+        <section id="section">
             <header class="artHeader">
                 <div>JHao</div>
                 <div>icon</div>
             </header>
-            <article>
+            <article id="article">
                 <div class="comFlexBetween">
                     <div class="comFlexCenter" style="flex-direction: column;">
                         <h1>JHao</h1>
@@ -83,13 +90,16 @@
 <script>
 
     //利用XMLHttpRequest读取md文件
-    function readMdfile(filePath) {
+    function readMdfile(filePath) { 
         let xhr = new XMLHttpRequest();
         xhr.open('get', filePath);
         xhr.send('')
         xhr.onload = function () {
-            document.getElementsByTagName('article')[0].innerHTML = marked(xhr.responseText)
+            let article=document.getElementById('article')
+            article.innerHTML = marked(xhr.responseText)
         }
+        let sec=document.getElementById('section')
+        sec.scrollTop=0
         return false
     }
 
@@ -110,10 +120,10 @@
 
     nav {
         background-color: #f5f6f7;
-        height: 100%;      
+        height: 100%;
         width: 30vw;
         min-width: 150px;
-        max-width: 400px;
+        max-width: 300px;
     }
 
     .search {
@@ -164,18 +174,21 @@
 
     .innerUl {
         display: none;
+        transition: all 0.5s ease-out;
     }
 
     .innerUlShow {
         display: block;
         list-style-type: none;
         margin-bottom: 0;
+        transition: all 0.5s ease-out;
+        padding-left: 20px;
     }
 
     .innerUlShow>li {
         padding-top: 5px;
         padding-bottom: 5px;
-        color: rgb(131, 127, 127);
+        color: rgb(63, 62, 62);
     }
 </style>
 

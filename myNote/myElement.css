@@ -7,3 +7,9 @@ myNav{
     margin-left: 20px;
     cursor: pointer;
 }
+.myNav_1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    place-items: center;
+}

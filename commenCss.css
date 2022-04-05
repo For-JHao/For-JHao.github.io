@@ -1,15 +1,34 @@
-.comFlexCenter{
-    display:flex;
+.comFlexCenter {
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.comFlexBetween{
+
+.comFlexBetween {
     display: flex;
     justify-content: space-between;
 }
-.comUlHorizontal{
+
+.comUlHorizontal {
     list-style-type: none;
     padding: 0;
     display: flex;
     justify-content: space-between;
+}
+
+/* icon */
+.arrowDown {
+    height: 6px;
+    width: 6px;
+    border-right: rgb(108, 108, 108) solid 2px;
+    border-bottom: rgb(108, 108, 108) solid 2px;
+    transform: rotate(45deg);
+}
+.arrowUp {
+    height: 6px;
+    width: 6px;
+    border-right: rgb(108, 108, 108) solid 2px;
+    border-bottom: rgb(108, 108, 108) solid 2px;
+    transform: rotate(-135deg);
+    transition: transform 0.35s;
 }
