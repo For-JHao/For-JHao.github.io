@@ -33,7 +33,7 @@
                     <div class="myNav_1">VUE<div class="arrowDown"></div>
                     </div>
                     <ul class="innerUlShow">
-                        <li tabindex="0" onclick="readMdfile('./note/learningNotes/VUe/源码.md')">原理实践</li>
+                        <li tabindex="0" onclick="readMdfile('./note/learningNotes/VUE/源码.md')">原理实践</li>
                         <li tabindex="0" onclick="readMdfile('./note/learningNotes/VUE/使用笔记.md')">使用笔记</li>
                     </ul>
                 </myNav>
@@ -114,7 +114,7 @@
         xhr.onload = function (pEvent) {
             let article = document.getElementById('article')
             if(pEvent.currentTarget.status!==200){
-                article.innerHTML = '<h3>请求出错，请联系管理员</h3>'
+                article.innerHTML = '<h3>请求出了点小问题！</h3>'
                 return
             }
             article.innerHTML = marked.parse(xhr.responseText)
