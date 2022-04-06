@@ -15,6 +15,9 @@
     display: flex;
     justify-content: space-between;
 }
+.comUlHorizontal>li>span{
+    display: block;
+}
 
 /* icon */
 .arrowDown {
