@@ -1,0 +1,1 @@
+This folder is used for providing a path of accessing images on line.
