@@ -29,6 +29,7 @@
     border-bottom:10px solid; 	//与height保持一致
     border-top:30px double; //bottom的三倍
 }
+//double属性值——“透明”双线条框
 ```
 
 
