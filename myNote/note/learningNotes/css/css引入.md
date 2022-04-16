@@ -2,10 +2,10 @@
 
 ## 链接式
 
-使用<link>标签
+使用<link>标签（必须指定rel）
 
 ```html
-<link href="./myStyle.css">
+<link rel="stylesheet" href="./myStyle.css">
 ```
 
 链接式<link>属于html的一部分，放在<head>标签内，css文件会同页面一起加载。
