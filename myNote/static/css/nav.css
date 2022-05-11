@@ -5,6 +5,26 @@ nav {
     min-width: 150px;
     max-width: 300px;
 }
+.navIcon{
+    display: none;
+}
+@media screen and (max-width:820px) {
+    nav{
+        display: none;
+    }
+    .navIcon{
+        display: block;
+        width:25px;
+        height:5px;
+        border-bottom:5px solid;
+        border-top:15px double; 
+        border-color: coral;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        opacity: 0.6;
+    }
+}
 
 myNav {
     display: block;

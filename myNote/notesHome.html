@@ -12,7 +12,8 @@
 
 <body>
     <main>
-        <nav>
+        <div class="navIcon" id="navIcon"></div>
+        <nav id="nav">
             <div class="menuTitle">
                 <h2 style="margin-left:20px; color: #f55a5a;">MENU</h2>
             </div>
@@ -124,7 +125,7 @@
         xhr.send('')
         xhr.onload = function (pEvent) {
             let article = document.getElementById('article')
-            if(pEvent.currentTarget.status!==200){
+            if (pEvent.currentTarget.status !== 200) {
                 article.innerHTML = '<h3>请求出了点小问题！</h3>'
                 return
             }
@@ -134,6 +135,34 @@
         sec.scrollTop = 0
         return false
     }
+
+
+    //移动端--导航栏点击显示隐藏
+    function openNavByClick(navDom) {
+        navDom.style.display = 'block'
+        navDom.style.position = 'absolute'
+    }
+
+    function closeNavByClick(navDom) {
+        if (navDom.style.display === 'block') {
+            navDom.style.display = 'none'
+            navDom.style.position = ''
+        }
+    }
+
+    function navClickEvent() {
+        let nav = document.getElementById('nav')
+
+        let navIcon = document.getElementById('navIcon')
+        navIcon.addEventListener("click", () => openNavByClick(nav))
+
+        //点击section区域，关闭导航栏
+        let section = document.getElementById('section')
+        section.addEventListener("click", () => closeNavByClick(nav))
+    }
+
+    navClickEvent()
+
 
 </script>
 <style>
@@ -168,12 +197,14 @@
             width: 100%;
             height: 100%;
         }
+
     }
 
     @media screen and (max-width:820px) {
         main {
             width: 100%;
             height: 100%;
+            grid-template-columns: auto;
         }
     }
 </style>

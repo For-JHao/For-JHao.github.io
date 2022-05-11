@@ -18,6 +18,14 @@
 .comUlHorizontal>li>span{
     display: block;
 }
+@media screen and (max-width:840px) {
+    .comUlHorizontal{
+        display: block;
+    }
+    .comUlHorizontal>li{
+        margin: 10px;
+    }
+}
 
 /* icon */
 .arrowDown {
