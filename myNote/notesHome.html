@@ -116,6 +116,7 @@
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/marked/4.0.2/marked.min.js"></script>
 <script src="./notesHome.js"></script>
+<script src="./mobile.js"></script>
 <script>
 
     //利用XMLHttpRequest读取md文件
@@ -137,31 +138,40 @@
     }
 
 
-    //移动端--导航栏点击显示隐藏
-    function openNavByClick(navDom) {
+//移动端操作
+
+    //注册移动端最大width
+    let mobileWidth = 820
+    let mobile = new MobileInstance(mobileWidth)
+
+    //导航栏的点击隐藏
+    let openNavByClick = mobile.runOnMobile((navDom) => {
         navDom.style.display = 'block'
         navDom.style.position = 'absolute'
-    }
-
-    function closeNavByClick(navDom) {
-        if (navDom.style.display === 'block') {
-            navDom.style.display = 'none'
-            navDom.style.position = ''
-        }
-    }
+    })
+    let closeNavByClick = mobile.runOnMobile((navDom) => {
+        navDom.style.display = 'none'
+        navDom.style.position = ''
+    })
 
     function navClickEvent() {
         let nav = document.getElementById('nav')
-
+        //点击icon展开菜单
         let navIcon = document.getElementById('navIcon')
         navIcon.addEventListener("click", () => openNavByClick(nav))
 
-        //点击section区域，关闭导航栏
+        //点击section区域，关闭菜单
         let section = document.getElementById('section')
         section.addEventListener("click", () => closeNavByClick(nav))
     }
-
     navClickEvent()
+
+    //脱离小屏，复原大屏样式
+    mobile.afterOutMobile(() => {
+        let nav = document.getElementById('nav')
+        nav.style.display = ''
+        nav.style.position = ''
+    })
 
 
 </script>
