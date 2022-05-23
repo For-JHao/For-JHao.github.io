@@ -1,4 +1,4 @@
-# XSS（Cross SiteScript）
+# XSS（Cross-Site Script）
 
 跨站脚本攻击；
 
