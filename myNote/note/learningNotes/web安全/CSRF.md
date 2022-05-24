@@ -22,7 +22,9 @@
 
 > 参考
 >
-> https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+> OWASP https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
 >
-> https://tech.meituan.com/2018/10/11/fe-security-csrf.html
+> 美团技术团队 https://tech.meituan.com/2018/10/11/fe-security-csrf.html
+>
+> MDN SameSite https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
