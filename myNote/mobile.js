@@ -7,8 +7,8 @@ function MobileInstance(maxWidth) {
 
     //包装函数仅移动端执行
     this.runOnMobile = function (fun, errFun) {
-        return function (arg) {
-            if (this.viewWidth < maxWidth) fun(arg)
+        return function (...arg) {
+            if (this.viewWidth < maxWidth) fun(...arg)
             else errFun && errFun()
         }.bind(this)
     }
