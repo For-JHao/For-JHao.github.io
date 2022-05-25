@@ -1,23 +1,28 @@
 nav {
     background-color: #f5f6f7;
     height: 100%;
-    width: 30vw;
-    min-width: 150px;
-    max-width: 300px;
+    overflow-y: auto;
+    overflow-x: clip;
+    transition: width 0.25s linear;
 }
-.navIcon{
+.navIcon {
     display: none;
+    transition: left 0.25s linear;
 }
+
 @media screen and (max-width:820px) {
-    nav{
-        display: none;
+    nav {
+        /* display: none; */
+        position:absolute;
+        width: 0;
     }
-    .navIcon{
+
+    .navIcon {
         display: block;
-        width:25px;
-        height:5px;
-        border-bottom:5px solid;
-        border-top:15px double; 
+        width: 25px;
+        height: 5px;
+        border-bottom: 5px solid;
+        border-top: 15px double;
         border-color: coral;
         position: fixed;
         top: 10px;
@@ -35,25 +40,32 @@ myNav {
     margin-left: 20px;
     cursor: pointer;
 }
-myNav:focus{
+
+myNav:focus {
     color: #f55a5a;
 }
-myNav a{
-    text-decoration:none;
+
+myNav a {
+    text-decoration: none;
     color: rgb(63, 62, 62);
 }
-myNav a:focus{
+
+myNav a:focus {
     color: #f55a5a;
 }
-myNav a:hover{
+
+myNav a:hover {
     color: #f55a5a;
 }
-myNav li:hover{
+
+myNav li:hover {
     color: #f55a5a;
 }
-myNav li:focus{
+
+myNav li:focus {
     color: #f55a5a;
 }
+
 .myNav_1 {
     width: 100%;
     display: flex;
@@ -66,6 +78,10 @@ myNav li:focus{
     align-items: center;
     height: 60px;
     background-color: #eff1f2;
+}
+
+.menu {
+    width: 200px;
 }
 
 .innerUlShow {

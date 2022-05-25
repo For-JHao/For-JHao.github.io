@@ -157,36 +157,36 @@
 //移动端操作
 
     //注册移动端最大width
-    let mobileWidth = 820
+    const mobileWidth = 820
     let mobile = new MobileInstance(mobileWidth)
 
-    //导航栏的点击隐藏
-    let openNavByClick = mobile.runOnMobile((navDom) => {
-        navDom.style.display = 'block'
-        navDom.style.position = 'absolute'
-    })
-    let closeNavByClick = mobile.runOnMobile((navDom) => {
-        navDom.style.display = 'none'
-        navDom.style.position = ''
-    })
+    //导航栏的显现隐藏
+    let openNavByClick = mobile.runOnMobile((navDom,isOpen) => {
+        navDom.style.width=isOpen?'230px':'0'
 
+    })
+    let moveNavIcon=mobile.runOnMobile((iconDom,isOpen)=>{
+        iconDom.style.left=isOpen?'240px':'10px'
+    })
+    let isOpen=false
     function navClickEvent() {
         let nav = document.getElementById('nav')
-        //点击icon展开菜单
         let navIcon = document.getElementById('navIcon')
-        navIcon.addEventListener("click", () => openNavByClick(nav))
-
-        //点击section区域，关闭菜单
-        let section = document.getElementById('section')
-        section.addEventListener("click", () => closeNavByClick(nav))
+        navIcon.addEventListener("click", () =>{
+            isOpen=!isOpen
+            openNavByClick(nav,isOpen)
+            moveNavIcon(navIcon,isOpen)
+        } )
     }
     navClickEvent()
 
     //脱离小屏，复原大屏样式
     mobile.afterOutMobile(() => {
         let nav = document.getElementById('nav')
-        nav.style.display = ''
-        nav.style.position = ''
+        let icon=document.getElementById('navIcon')
+        nav.style=''
+        icon.style=''
+        isOpen=false
     })
 
 
