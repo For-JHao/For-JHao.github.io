@@ -59,8 +59,11 @@ new会先创建一个继承构造函数prototype的空对象，再执行构造�
         console.log(stu)
 
         function newFun(constructor,...arg){
-            let obj={}
-            obj.__proto__=constructor.prototype
+            //使用__proto__，不推荐
+            // let obj={}
+            // obj.__proto__=constructor.prototype
+            
+            let obj=Object.create(constructor.prototype)
             let res=constructor.call(obj,...arg)
             return typeof res==="object"?res:obj
         }
