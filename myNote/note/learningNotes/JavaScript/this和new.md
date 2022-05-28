@@ -73,3 +73,45 @@ new会先创建一个继承构造函数prototype的空对象，再执行构造�
 ![new](./img/newFun.png)
 
  
+
+## instanceof
+
+**运算符**；用于检测**构造函数的prototype**是否出现在某个对象原型链上
+
+实现instanceof：
+
+```js
+        function Student(name,age){
+            this.age=age
+            this.name=name
+        }
+        let stu=new Student('haha','11')
+        console.log(stu)
+
+        function instanceofFun(obj,constructor){
+            //方式一：攀升原型链
+            // let target=Object.getPrototypeOf(obj)
+            // while(target){
+            //     if(target===constructor.prototype) return true
+            //     else target=Object.getPrototypeOf(target)
+            // }
+            // return false
+
+            //方式二：使用方法isPrototypeOf
+            return constructor.prototype.isPrototypeOf(obj)
+        }
+        console.log(stu instanceof Student,instanceofFun(stu,Student))
+        console.log(stu instanceof Object,instanceofFun(stu,Object))
+        console.log(stu instanceof Function,instanceofFun(stu,Function))
+
+```
+
+![instance](./img/instanceofFun.png)
+
+
+
+*补充*：
+
+fun.isPrototypeOf（obj）：检测obj是否在**fun**的原型链上；
+
+obj instanceof fun：检测obj是否在**fun.prototype**的原型链上
