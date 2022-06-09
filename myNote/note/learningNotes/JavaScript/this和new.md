@@ -52,6 +52,11 @@ new会先创建一个继承构造函数prototype的空对象，再执行构造�
 
 ```js
         function Student(name,age){
+            //判断是否被new调用
+            if(!(this instanceof Stu)){
+                throw 'constructor Stu should be calles with "new" word'
+            }
+            
             this.age=age
             this.name=name
         }
