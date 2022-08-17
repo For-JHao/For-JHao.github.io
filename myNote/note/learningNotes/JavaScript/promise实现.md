@@ -1,4 +1,4 @@
-# Promise原理及实现 
+# Promise原理及实现
 
 promise.then()的异步执行实际通过回调函数的方式实现；
 
@@ -57,7 +57,7 @@ promise.then()的异步执行实际通过回调函数的方式实现；
             } catch (error) {
                 rejected(error)
             }
-            
+
         }
         let tr=new PromiseFun((res,rej)=>{
             // res(111)   
@@ -80,12 +80,6 @@ promise.then()的异步执行实际通过回调函数的方式实现；
 
 2. 
 
-
-
-
-
-
-
 > 参考
->
+> 
 > https://shq-splendid.gitee.io/2021/06/02/JavaScript%E5%BC%82%E6%AD%A5/

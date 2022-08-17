@@ -12,7 +12,7 @@ call()和bind()的区别在于，call()会立即执行，bind()会返回一个�
             _this.fn(...args)
             delete _this.fn
         }
-        
+
         Function.prototype.myBind=function(obj,...args){
             let _this=this
             return function(){
@@ -41,11 +41,6 @@ call()和bind()的区别在于，call()会立即执行，bind()会返回一个�
 
 ![callBind](./img/call-bind.png)
 
-
-
 *补充*：
 
 call()和apply()，唯一区别在于，除了第一个参数this对象外，call()可接收多个参数，apply()接收一个数组；
-
-
-
