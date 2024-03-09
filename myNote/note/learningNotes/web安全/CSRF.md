@@ -18,13 +18,10 @@
 
 > 能有效抵御CSRF，但不支持子域，子域需要用户重新登录
 
-
-
 > 参考
->
+> 
 > OWASP https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
->
+> 
 > 美团技术团队 https://tech.meituan.com/2018/10/11/fe-security-csrf.html
->
+> 
 > MDN SameSite https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Set-Cookie/SameSite
-

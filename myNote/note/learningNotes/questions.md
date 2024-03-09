@@ -85,7 +85,9 @@ vue2中，vue会在初始化时修改data()中声明变量的setter和getter，�
 > ```js
 > //例：a=[1,2,3]
 > a[1]=2;
-> a.length=2 //均不会触发响应
+> a.length=2 
+> //均不会触发响应;
+> //不会触发响应，但是数组的改动仍然有效。在下次触发响应时，会使用新数据进行计算
 > ```
 > 
 > Vue.set()同样也可用于数组（data中已声明）元素的修改；
@@ -123,12 +125,14 @@ vue的响应式使用了观察者模式；
 - nextTick()作用，等待虚拟DOM更新还是DOM更新？
 
 > nextTick()等待（真实）dom更新后调用回调；
-
-​    补充：vue2.6中， nextTick()属于微任务
+> 
+> dom的操作和更改是同步的，但dom的渲染是异步的（生成render树等，UI渲染属于宏任务）；
+> 
+> ​nextTick()基于微任务实现，必然在dom更新后；
 
 - 绑定事件，同一个function中多次修改参数，dom更行几次，function中调用事件再修改呢，如何实现？
 
-只要不是在新的宏任务中修改，DOM就只更新一次
+只要不是在新的宏任务中修改，DOM就只渲染一次，但每次js操作都会实时修改dom；
 
 实现：
 
@@ -163,6 +167,22 @@ key：vnode的唯一标识，使vue可以更准确更高效的找到对应的vno
 ## vue-router
 
 ### 页面跳转怎么防止内存泄漏
+
+解除不用的引用，尤其是挂在全局对象上的引用，js垃圾回收机制会自动回收；
+
+需要注意的地方：
+
+- 定时器；
+
+- 事件监听；
+
+- 全局对象调用的函数，而函数中在this上挂载了变量；（使用严格模式可避免）；
+
+- 前端路由中，如果页面dom挂在了全局对象上，即使切换了dom，原dom需要从全局对象上解除引用才能被清除；
+
+es6中提供了新的数据结构：weakset/weakmap；创建弱引用，不会阻止垃圾回收；
+
+*参考：[万恶的前端内存泄漏及万善的解决方案 - 掘金 (juejin.cn)](https://juejin.cn/post/6914092198170460168#heading-11)*
 
 ### 动态路由
 
@@ -224,6 +244,8 @@ forEach这些函数本身无法跳出循环，return会实现continue效果；�
 
 ```js
 1. promise.all([fun1(),fun2()...]).then()
+//all全部成功兑现会返回一个数组，数组顺序同传值顺序（非兑现顺序！）；
+//其中有任意一个被rejected，都会导致then走到reject逻辑,之接收第一个拒绝原因；
 2. async function(){
     await fun1()
     await fun2()
@@ -248,7 +270,53 @@ forEach这些函数本身无法跳出循环，return会实现continue效果；�
 
 ### instanceof 实现
 
+递归判断实例的原型[[prototype]]，是否在构造函数prototype上；
+
+*注意：*
+
+- [[prototype]]不同于prototype，prototype存在于构造函数上，为构造函数分给所有实例对象的共享属性，也是其实例**对象的原型**。
+
+- [[prototype]]通过方法Object.getPrototypeOf(obj)获得，等同于非标准的obj.__proto
+
+```js
+//prototype是函数构建实例时分配给所有对象的原型；
+let b=new Array()
+//用字面量方式b=[]申明，结果也相同；
+console.log(Object.getPrototypeOf(b)===Array.prototype) //true
+
+//prototype只存在于函数上
+console.log(b.prototype) //undefined
+
+
+//另外，构造函数也有自己的[[prototype]]，等同于Function的prototype；
+console.log(Object.getPrototypeOf(Array)===Function.prototype) // true
+```
+
+*补充：*
+
+- 以下均成立
+  Object.getPrototypeOf(Function)===Object.Prototype
+  Object.getPrototypeOf(Object.Prototype)===null
+
+- 箭头函数没有默认的prototype，但仍然有[[prototype]]，同样指向Function.prototype
+
 ### setTimeout最小为什么是4ms
+
+在html 5标准中，规定当setTimeout嵌套超过5层，并且设置定时小于4ms时，setTimeout默认最低执行计时时间为4ms；但实际浏览器没有完全按当前标准实现。
+
+单次定时器默认最低时间仍然>0ms，防止js引擎**事件循环**过度，阻塞页面响应。
+
+```js
+  //因为实际最低计时不为0，且大于0.9ms，0.9先计时完成入栈；
+  //此时页面会先打印0.9，再打印0；
+  setTimeout(()=>console.log('0.9'),0.9);
+  setTimeout(()=>console.log('0'),0);
+
+  //测试默认最低时间1ms>defaultTime>0.9ms；chrome版本122；
+  //先打印0；
+  setTimeout(()=>console.log('1'),1);
+  setTimeout(()=>console.log('0'),0);
+```
 
 ### symbol使用场景
 
@@ -268,21 +336,37 @@ forEach这些函数本身无法跳出循环，return会实现continue效果；�
 
 ### 跨域解决方案
 
+*参考：[什么是跨域？及7种跨域解决方法 - 程序猿咬棒棒糖拽天下 - 博客园](https://www.cnblogs.com/mochenxiya/p/16597545.html)*
+
 ### localStorage和sessionStorage区别；
 
 localStorage存储的数据保存在浏览器会话中，没有过期时间设置，即使浏览器关闭也仍然存在（除非清理缓存）；而sessionStorage保存在页面会话中，页面关闭即被清除；
 
 ### 缓存策略
 
-     强制缓存和协商缓存
+见：[缓存策略](./浏览器原理/缓存策略.md)
 
 ### TCP怎么保证完整性
+
+序列号：TCP每个包都有一个序号，这些序号是+1递增的；
+
+确认应答机制：接收方每接收到一定数量TCP包（默认为2个）会放发送一个确认信息（即ACK，包含2个数据：当前正期待接收到的序号；接收方接收窗口剩余容量），来给发送方和自己发送的序号对比，判断有没有丢包，需不需要重发；
+
+流量控制：TCP每个包的负载大小不一定相等，当网络通畅时会逐渐增大负载。这点也是发送方借由ACK来判断。
 
 ### get、put、post请求区别
 
 put和post都可以用来提交数据，但是put是幂等的，即同**一个请求**不论执行多少次结果都一样（实际处理put请求时存在目标对象会将该对象删掉重新创建，而post遇到已存在的目标对象则会在该对象上修改，所以同一个请求多次处理可能会导致意外影响）
 
 ### 不同页面的数据交互
+
+- url携带；
+
+- TargetWindow.postMessage()，需要目标页面的window对象;
+
+        *参考：[浅析 postMessage 方法介绍、如何接收数据（监听message事件及其属性介绍）、使用postMessage的安全注意事项、具体使用方式（父子页面如何互发消息、接收消息） - 古兰精 - 博客园](https://www.cnblogs.com/goloving/p/15381013.html)*
+
+- localStorage和sessionStorage（必须同域）；
 
 ### websocket
 
@@ -296,7 +380,7 @@ send()：向服务器发送数据；
 
 ### http2
 
-二进制，解析更快；
+采用二进制传输，解析更快；
 
 多路复用，只建立一个TCP，双向数据流，根据标识区分重组信息；
 
@@ -322,6 +406,14 @@ send()：向服务器发送数据；
 
 ### 权限认证管理；
 
+- 用户分组
+
+- 接口分组
+
+- 接口权限配置；控制用户对数据的访问、修改权限；
+
+- 菜单权限配置；控制用户对界面菜单的访问权限；
+
 ### 静态数据存储策略（图片，js等）
 
 ### 图片预加载和懒加载
@@ -330,11 +422,12 @@ send()：向服务器发送数据；
 
 懒加载，即等到需要的时候，再赋值src，此时开始加载图片；
 
-- 使用HTML提供的全局Image()函数；
+- 使用HTML提供的全局Image()函数；返回一个img标签实例
 
 ```js
 var myImage = new Image(width, height);
 myImage.src = 'picture.jpg';//赋值src时，请求获取图片
+document.body.appendChild(myImage)；
 ```
 
 - 或通过img标签的自定义属性暂存src
@@ -353,19 +446,55 @@ element.setAttribute(name, value);
 
 ### 图片怎么压缩
 
+canvas提供的以下两个api都可以压缩图片质量：
+
+**toBlob(callback, type, quality)**：将canvas内容生成blob对象交由callback，quality参数指定图片质量；
+
+**toDataUrl(type, encoderOptions)**：返回一个可直接用于图片展示的data URL，第二个参数指定图片质量；
+
+使用canvas api需要先将img画到canvas上；
+
+如果是处理用户上传的照片，一般是file对象，file对象可以转化为base64编码（借助readAsDataURL()），再将img src指向该base64码，以此转为为img对象；
+
 ### **最近项目中遇到的难点**
 
-一个表格，加载初始数据，可动态增删行，最后保存；
+- 一个表格，加载初始数据，可动态增删行，最后保存；
+  
+  其中一格用的插槽，插的一个封装下拉框，下拉框要绑一个本地属性option，但是有多个下拉框，属性冲突；
+  
+  考虑用数组，每次新增对象元素，每个对象带一个option，不行（当时不知道Vue.set()方法）；
+  
+  最后采用的二次封装，option和下拉框；
 
-其中一格用的插槽，插的一个封装下拉框，下拉框要绑一个本地属性option，但是有多个下拉框，属性冲突；
+- 基于vue封装table组件，对data采用了二次赋值，导致vue响应式失效；
 
-考虑用数组，每次新增对象元素，每个对象带一个option，不行（当时不知道Vue.set()方法）；
+- 骨架屏及加载优化；
+  
+  mutationObserver；
 
-最后采用的二次封装，option和下拉框；
+- 异步树组件的自动寻址展开；
+
+- wallet的安全等级提升，及谷歌验证码升级；
+
+- webform动态配置；
+
+- sdk优化：sheerId的proxy；三端入口逻辑整合；
 
 ### iframe的loading处理
 
+iframe标签可以添加onload事件，监听iframe的加载时间；
+
+iframe和父窗口通信需要满足同源策略；如果跨域，可以使用postMessage()通信，
+
+iframe内则通过监听message事件获取信息；
+
 ### 微前端
+
+一种架构思想，将前端分成各个独立的模块，每个模块可以独立开发和运行，甚至使用不同的技术栈，而互不影响；这样对于越来越大的工程，能更方便开发和维护；
+
+一个主应用（基座），通过路由来管理各个子应用；需要保证每个子应用的装载和卸载不会污染全局window，每个模块js、html、css隔离；
+
+比如采用iframe，但iframe的完全隔离也造成了一定的不方便；
 
 ### 前后端分离部署优势
 
@@ -373,11 +502,21 @@ element.setAttribute(name, value);
 
 体验更好，即使服务器失去响应，前端也能在一定程度上进行使用；
 
+前端逻辑交互更快；
+
 更安全，服务器放在内网，外网使用代理访问；
 
 ### cookie存储
 
-response 
+最大4KB;
+
+通过cookie请求头携带；
+
+如果cookie没有设置httpOnly，js就可以通过document.cookie获取；
+
+前端设置cookie同样通过document.cookie；
+
+    
 
 ### 网络攻击防御（XSS和csrf）
 
@@ -385,11 +524,15 @@ response
 
 资源太大加载阻塞；
 
+网络请求太多；
+
 js运行长时间占用线程；
 
 内存占用过高（内存泄漏；事件太多等），运行卡顿；
 
 ### 重复请求控制，如抢购、下单等
+
+单例模式；或者节流
 
 ## CSS
 
@@ -397,7 +540,11 @@ js运行长时间占用线程；
 
 ​    标准盒子模型：width只包含content；
 
-​    IE盒子模型：width包含padding和border（不包含margin）；
+​    IE盒子模型（怪异盒模型）：width包含padding和border（不包含margin）；
+
+    css可通过 **box-sizing**: content-box（标准模型，默认值）|| border-box 设置
+
+
 
 ### display:none和visible区别；
 
@@ -409,7 +556,7 @@ js运行长时间占用线程；
 
 - visibility: hidden不会影响计数器的计数，例如，li标签的序号计数；
 
-### img标签和background**-**image属性区别
+### img标签和background-image属性区别
 
 - background-image无法使用懒加载，而img标签可以通过设置其src进行懒加载的实现
 - img的src会优先background-image进行请求
@@ -418,7 +565,7 @@ js运行长时间占用线程；
 
 ### Position
 
-### 前后距离固定，中间多个元素铺满
+### 实现前后距离固定，中间多个元素铺满
 
 - flex布局：
 
@@ -438,13 +585,15 @@ js运行长时间占用线程；
 
 ### 1px问题
 
-移动端的设备像素和css的像素并不一定是1：1的关系，导致css设置的1px在移动端宽度显示不正确；
+尤其在移动端上，因为屏幕小而分辨率很高，设备像素和css的像素并不一定是1：1的关系，css设置的1px在终端会用多个像素渲染；
+
+这个比例可以通过属性window.devicePixelRatio（即DPR，物理像素 / css像素）查看；
 
 解决方案：
 
-通过window.devicePixelRatio获取当前设备像素比例，设置< meta name="viewport">的content属性；
+通过window.devicePixelRatio获取当前设备像素比例，设置< meta name="viewport">的content属性；通过viewport可以控制当前视口大小，以此将物理像素和css像素拉到1:1的关系；
 
-DPR(devicePixelRatio) ：设备像素比
+
 
 ## Webpack
 

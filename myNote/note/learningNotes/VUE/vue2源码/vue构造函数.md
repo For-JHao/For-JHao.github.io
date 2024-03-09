@@ -12,7 +12,7 @@ Vue构造函数入口文件
 //Vue构造函数
 function Vue (options) {
   if (process.env.NODE_ENV !== 'production' &&
-    !(this instanceof Vue)    //判断是否被new调用
+    !(this instanceof Vue)    //判断是否被new调用；或者用new.target
   ) {
     warn('Vue is a constructor and should be called with the `new` keyword')
   }

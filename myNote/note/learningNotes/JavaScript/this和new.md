@@ -109,5 +109,3 @@ new会先创建一个继承构造函数prototype的空对象，再执行构造�
 *补充*：
 
 fun.isPrototypeOf（obj）：检测obj是否在**fun**的原型链上；
-
-obj instanceof fun：检测obj是否在**fun.prototype**的原型链上

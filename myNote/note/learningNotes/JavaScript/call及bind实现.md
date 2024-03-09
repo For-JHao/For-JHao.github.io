@@ -10,6 +10,8 @@ call()和bind()的区别在于，call()会立即执行，bind()会返回一个�
         Function.prototype.myCall=function(_this,...args){
             _this.fn=this
             _this.fn(...args)
+        //this为当前调用myCall的上下文，这里即外部调用myCall的函数；
+        //把外部函数（this）挂在指定的_this上，用新的上下文去调用
             delete _this.fn
         }
 

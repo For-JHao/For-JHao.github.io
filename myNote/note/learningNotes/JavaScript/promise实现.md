@@ -78,8 +78,6 @@ promise.then()的异步执行实际通过回调函数的方式实现；
 
 此时还不满足promise的链式调用；链式调用需要then返回新的promise；
 
-2. 
-
-> 参考
-> 
-> https://shq-splendid.gitee.io/2021/06/02/JavaScript%E5%BC%82%E6%AD%A5/
+2. > 参考
+   > 
+   > https://shq-splendid.gitee.io/2021/06/02/JavaScript%E5%BC%82%E6%AD%A5/

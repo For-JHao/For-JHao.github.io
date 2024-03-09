@@ -22,9 +22,12 @@ Document Object Model——文档对象模型;
 
 删除：nodeFather.removeChild();（不能自我删除）
 
-
-
 解析元素并插入：domObj.insertAdjacentHTML()；
 
 *仅插入，比innerHTML（销毁再插入）更快*
 
+### 判断页面的来源地址
+
+document.referrer
+
+只能判断a链接跳转，无法判断浏览器后退的跳转

@@ -6,8 +6,6 @@ try...catch...finally
 
 防止代码出错阻塞程序运行，将发生的错误捕获并进行特定处理；
 
-
-
 **执行顺序**
 
 1. try
@@ -15,8 +13,6 @@ try...catch...finally
 2. 如果try有抛出错误（自动或手动抛出的错误），执行catch
 
 3. 无论有无抛错，最后执行finally
-
-
 
 *补充*：
 
@@ -43,8 +39,6 @@ try...catch...finally
 
 ![img](C:\Users\JHao\Documents\GitHub\For-JHao.github.io\myNote\note\learningNotes\JavaScript\img\try_catch_1.png)
 
-
-
 - **抛出的错误会被最近的catch捕获**
   
   如果最近的catch是父级，即被父级catch捕获
@@ -69,8 +63,6 @@ try...catch...finally
 ```
 
 ![img](C:\Users\JHao\Documents\GitHub\For-JHao.github.io\myNote\note\learningNotes\JavaScript\img\try_catch_2.png)
-
-
 
 **返回值**
 
@@ -99,8 +91,6 @@ try...catch...finally
 
 ![img](C:\Users\JHao\Documents\GitHub\For-JHao.github.io\myNote\note\learningNotes\JavaScript\img\try_catch_return_2.png)
 
-
-
 - 在try/catch/finally各自代码块中，return后，后续代码均不会再执行
 
 ```js
@@ -122,22 +112,16 @@ try...catch...finally
                 console.log('finally block')
             }
             // try...finally完成，函数return 1，停止执行
-            
+
             console.log('function end')
             return 4
         };
-    
+
         console.log(test()) 
 ```
 
 ![img](C:\Users\JHao\Documents\GitHub\For-JHao.github.io\myNote\note\learningNotes\JavaScript\img\try_catch_return_1.png)
 
-
-
 *注意*
 
 在遇到return时，return后面的语句即会执行；如: return 1+2，即使在try...catch...finally中函数没有立即return，但1+2仍会立即执行
-
-
-
-
