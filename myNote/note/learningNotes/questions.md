@@ -104,7 +104,9 @@ vue2中，vue会在初始化时修改data()中声明变量的setter和getter，�
 
 ### nextTick()实现
 
-promise.then() / mutationObserver
+promise.then() 
+
+如果promise不可用，则使用mutationObserver
 
 ### 变量循环修改和setter/getter的反复触发的冲突
 
@@ -128,7 +130,7 @@ vue的响应式使用了观察者模式；
 > 
 > dom的操作和更改是同步的，但dom的渲染是异步的（生成render树等，UI渲染属于宏任务）；
 > 
-> ​nextTick()基于微任务实现，必然在dom更新后；
+> nextTick()基于微任务实现，必然在dom更新后；
 
 - 绑定事件，同一个function中多次修改参数，dom更行几次，function中调用事件再修改呢，如何实现？
 
@@ -193,11 +195,15 @@ es6中提供了新的数据结构：weakset/weakmap；创建弱引用，不会�
 - history和hash路由区别
 1. **hash模式**
    
-   url带有一个hash字符‘#’，改动hash值不会引起后端url请求；故可通过hash传参，监听 window 的**hashchange事件**实现前端路由；
+   url带有一个hash字符‘#’，改动hash值不会引起后端url请求；
 
+   可以通过location.hash直接改变url上的hash值；
+   
+   通过监听 window 的**hashchange事件**，做相应的dom切换，实现前端路由；
+   
 2. **history模式**
    
-   HTML5提出来的api；可以通过全局的history对象提供的一系列方法，操作浏览器会话历史；除了借助url传递参数（大小受限），还可以通过pushState(obj, title, url)第一个参数传送大数据；
+   HTML5提出来了api pushState()和replaceState()；可以通过全局的history对象提供的一系列方法，操作浏览器会话历史；除了借助url传递参数（大小受限），还可以通过pushState(obj, title, url)第一个参数传送大数据；
    
    history提供的**pushState()**和**replaceState()**方法，只会更新当前url，不会发起路由器请求；（相对的，通过location.href 和 location.replace 切换时会向服务器发送请求）
 
@@ -258,7 +264,7 @@ forEach这些函数本身无法跳出循环，return会实现continue效果；�
 ### new的工作原理
 
 1. 创建一个空的简单JavaScript对象（即`**{}**`）；
-2. 为步骤1新创建的对象添加属性`**__proto__**`，将该属性链接至构造函数的原型对象 ；
+2. 为步骤1新创建的对象添加属性[[Prototype]]（即老版本的`**__proto__**`），将该属性链接至构造函数的原型对象 ；
 3. 将步骤1新创建的对象作为`**this**`的上下文 ；
 4. 如果该函数没有返回对象，则返回`**this**`；如果构造函数有返回对象，则采用构造函数的返回值。
 
@@ -276,7 +282,7 @@ forEach这些函数本身无法跳出循环，return会实现continue效果；�
 
 - [[prototype]]不同于prototype，prototype存在于构造函数上，为构造函数分给所有实例对象的共享属性，也是其实例**对象的原型**。
 
-- [[prototype]]通过方法Object.getPrototypeOf(obj)获得，等同于非标准的obj.__proto
+- [[prototype]]通过方法Object.getPrototypeOf(obj)获得，等同于老版本非标准的obj.__proto_，现在的_proto_为Object.prototype的访问器（由 getter 和 setter 函数组成）
 
 ```js
 //prototype是函数构建实例时分配给所有对象的原型；
@@ -325,6 +331,20 @@ console.log(Object.getPrototypeOf(Array)===Function.prototype) // true
 模拟对象的私有属性（使用symbol作为属性名，属性名唯一，无法复现属性名称来调用）；
 
 ### 多个promise的执行顺序和返回值
+
+### 闭包
+
+一个函数及其捆绑的环境状态组合，包含闭包创建时作用域内的所有局部变量；
+
+闭包随着函数创建同时创建；让函数内部可以访问外部函数的作用域；
+
+**意义**：让函数可以与其操作的数据（环境）关联起来；
+
+- 模拟面向对象编程；
+
+- 模拟私有方法：定义的内部函数（即成为私有方法），只有同样作用域下暴露（return）的函数能够访问内部函数，而外界作用域无法访问；
+
+*参考：[闭包 - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)*
 
 ## 浏览器
 
@@ -544,8 +564,6 @@ js运行长时间占用线程；
 
     css可通过 **box-sizing**: content-box（标准模型，默认值）|| border-box 设置
 
-
-
 ### display:none和visible区别；
 
 - display: none隐藏后的元素不占据任何空间（仍然存在于DOM），更改触发回流；
@@ -593,8 +611,6 @@ js运行长时间占用线程；
 
 通过window.devicePixelRatio获取当前设备像素比例，设置< meta name="viewport">的content属性；通过viewport可以控制当前视口大小，以此将物理像素和css像素拉到1:1的关系；
 
-
-
 ## Webpack
 
 ### 原理
@@ -603,4 +619,110 @@ js运行长时间占用线程；
 
 **STAR**
 
-了解不同模块，关注整体业务（包括人员、项目、配置等）
+了解不同模块，关注整体业务（包括人员、项目、配置等） 
+
+# 代办：
+
+### 执行上下文的生命周期（三个阶段）：
+
+1. 创建
+   
+   1. 建立环境记录
+   
+   2. 建立作用域链
+   
+   3. 确定this指向
+
+2. 执行
+
+3. 回收
+
+### 事件三个流程：
+
+根据W3C模型，事件传播按顺序存在以下三个阶段
+
+1. 捕获阶段
+
+   触发事件后，从最高的window节点往目标元素传播；捕获阶段总是发生；
+
+   addEventListener(type, listener, useCapture)添加的监听器，useCapture默认false，即默认**不会**在捕获阶段执行；
+
+   通过设置useCapture为true，以在捕获阶段执行操作；
+
+2. 目标阶段
+
+   事件到达目标元素；
+
+   event的target和srcElement会包含目标元素的引用；
+
+3. 冒泡阶段
+
+   事件从目标元素往父级传播，直到window节点；
+
+   addEventListener()默认在冒泡阶段处理事件；
+
+   
+
+*补充*：
+
+- window节点在document节点上面；
+
+- 通过event.stopPropagation()可以阻止事件传播，包括**事件捕获和事件冒泡**；
+- 事件传播过程，event对象始终是同一个，满足严格相等，event.target也始终是目标元素，非当前元素。获取当前元素可以用currentTarget或者this；
+
+
+
+### promise静态方法：
+
+all()：等待所有成功后返回，一旦有一个失败直接返回；
+
+allSettled()：无论失败还是成功，等待所有promise结果再返回；
+
+any()：有一个成功了就返回；
+
+race()：等待一个promise出结果就返回；
+
+
+
+### 怎么确保异步事件按触发顺序执行：
+
+1. 使用回调，在前一个完成后调用下一个
+2. 使用promise的then()链接
+3. 使用async/await
+
+
+
+### 伪元素伪类：
+
+[伪类伪元素](.\css\伪类和伪元素.md)
+
+**伪类**：冒号开头的关键字。选择器的一种，相当于一个预置的css类名。
+
+用于选择处于特定状态的元素，比如第一个元素、鼠标悬浮的元素等；
+
+
+
+**伪元素**：双冒号开头的关键字。也是一种选择器，能让原本完整的一个元素，一部分独立出来仿佛被加了新元素包裹，并单独施加效果。（仿佛新加了一个元素，而不是在现有元素上添加类）
+
+比如，::before和::after，和content属性搭配往文中插入内容；用::first-line设置现有div第一行文字，而不用再去判断一行长度添加span。
+
+
+
+伪元素和伪类可以搭配使用，如
+
+```
+article p:first-child::first-line {
+  font-size: 120%;
+  font-weight: bold;
+}
+```
+
+
+
+
+
+### 实现属性/方法私有化
+
+闭包；
+
+proxy；
