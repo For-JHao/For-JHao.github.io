@@ -1,10 +1,20 @@
 jobs:
+
+  on:
+  push:
+    branches:
+      - vite-react  # 触发分支的推送事件
+
   # Build job
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # 设置 Node.js 版本
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
