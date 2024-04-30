@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2  # 检出代码到工作目录
+      uses: actions/checkout@v4  # 检出代码到工作目录
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: '20'  # 设置 Node.js 版本
 
@@ -25,9 +25,3 @@ jobs:
     - name: Build
       run: npm run build  # 执行构建命令，如有必要
       working-directory: ./web-vite-react  # 指定工作目录
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}  # 需要 GitHub Token 权限
-        publish_dir: ./ # 指定构建后的目录
