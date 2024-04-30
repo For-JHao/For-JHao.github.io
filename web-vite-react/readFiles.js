@@ -6,9 +6,6 @@ fs.readdir('../myNote/note/learningNotes', { recursive: true }, (err, files) => 
         return;
     }
 
-
-    console.log(files)
-
     const fileList=files.filter(el => el.endsWith('.md')).sort()
 
     fs.writeFileSync('notesList.json', JSON.stringify(fileList));
