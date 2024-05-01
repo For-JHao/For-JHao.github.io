@@ -2,3 +2,5 @@
 test.html
 module.js
 .vscode/launch.json
+node_modules
+web-vite-react/notesList.json

@@ -1,0 +1,11 @@
+html,body,.wrapper{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: rgb(235, 230, 230);
+
+}
+
+.wrapper{
+  background-image: url(./assets/beach.jpg);
+}

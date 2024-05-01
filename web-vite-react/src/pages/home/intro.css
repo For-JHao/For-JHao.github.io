@@ -1,0 +1,11 @@
+.intro {
+    grid-area: intro;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 2px;
+}
+.introTitle{
+    padding-top: 200px;
+}
