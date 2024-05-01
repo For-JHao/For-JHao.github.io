@@ -2,11 +2,6 @@ import { Menu } from 'antd';
 import PropTypes from 'prop-types';
 
 import noteList from '/notesList.json'
-import Display from './display';
-
-//TODO. undefined
-// const noteFileName=import.meta.env.VITE_NOTE_PATH
-// console.log(noteFileName)
 
 let initKey = 0
 
@@ -27,20 +22,23 @@ function getMenuList(listItem) {
     let list = []
 
     for (let path of listItem) {
+        //note. different OS use different separator
+        //eg. windows:'\\', ubuntu:'/'
         let pathArr = path.split('\\')
 
-        let temList = list, target = null
+        let temList = list, target = null, prePath=''
         while (pathArr.length >= 2) {
             //find the menu should be injected
             target = temList.find(el => el.label === pathArr[0])
             if (target === undefined) break
             else {
                 temList = target.children
+                prePath=target.path
                 pathArr.shift()
             }
         }
 
-        let newMenu = menuItemPack(pathArr, target?.path)
+        let newMenu = menuItemPack(pathArr, prePath)
 
         //sort. make sure folders on the menu top
         newMenu.children ? temList.unshift(newMenu) : temList.push(newMenu)

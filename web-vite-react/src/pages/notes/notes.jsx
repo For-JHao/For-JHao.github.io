@@ -9,34 +9,9 @@ import { useState } from "react";
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const modules = import.meta.glob("../../../../myNote/note/learningNotes/*.md", {
-    query: '?raw',
-    import: 'default',
-})
-/** */
-console.log(modules)
-console.log(import.meta.env.BASE_URL)
-
 function readMdFiles(url) {
-    // fetch(url).then((response) => {
-    //     console.log(response)
-    //     return response.blob()})
-    // .then((data) => console.log(data));
-
-    const prefix = '../../../../myNote/note/learningNotes'
-
-    let xhr = new XMLHttpRequest()
-    console.log(prefix + url)
-    xhr.open('GET', prefix + url)
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            console.log(xhr)
-            let files = xhr.responseText
-            console.log(files)
-        }
-    }
-
-    xhr.send()
+    return fetch(url).then((response) => {
+        return response.text()})
 }
 
 
@@ -65,12 +40,9 @@ function NotesPannel() {
     let [mdContent, setMdContent] = useState('')
 
     function loadMdContent(obj) {
-        // console.log(obj)
-        // console.log(obj.item.props.path)
-        // modules[obj.item.props.path]().then(res => {
-        //     setMdContent(marked.parse(res))
-        // })
-        readMdFiles(obj.item.props.path)
+        readMdFiles(obj.item.props.path).then(file=>{
+            setMdContent(marked.parse(file))
+        })
     }
 
     return (
