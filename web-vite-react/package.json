@@ -4,13 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "preRun":"node readFiles.js",
+    "preRun": "node readFiles.js",
     "dev": "npm run preRun && vite",
     "build": "npm run preRun &&vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.6",
     "antd": "^5.16.4",
     "marked": "^12.0.2",
     "react": "^18.2.0",

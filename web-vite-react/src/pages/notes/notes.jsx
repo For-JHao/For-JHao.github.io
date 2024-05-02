@@ -6,12 +6,14 @@ import "./notes.css"
 
 import { theme, Layout } from 'antd';
 import { useState } from "react";
+import { SmileOutlined } from '@ant-design/icons';
 
 const { Header, Footer, Sider, Content } = Layout;
 
 function readMdFiles(url) {
     return fetch(url).then((response) => {
-        return response.text()})
+        return response.text()
+    })
 }
 
 
@@ -40,7 +42,7 @@ function NotesPannel() {
     let [mdContent, setMdContent] = useState('')
 
     function loadMdContent(obj) {
-        readMdFiles(obj.item.props.path).then(file=>{
+        readMdFiles(obj.item.props.path).then(file => {
             setMdContent(marked.parse(file))
         })
     }
@@ -52,11 +54,22 @@ function NotesPannel() {
                     <NotesMenu onMenuClick={loadMdContent} />
                 </Sider>
                 <Layout>
-                    <Header style={headerStyle}>Header</Header>
+                    <Header style={headerStyle} className="notesHeader">
+                        <div>JHao</div>
+                        <div >
+                            <SmileOutlined />
+                        </div>
+                    </Header>
                     <Content style={contentStyle}>
                         <Display content={mdContent}></Display>
                     </Content>
-                    <Footer>Footer</Footer>
+                    <Footer>
+                        <ul className="notesFooter">
+                            <li><span>Author：</span>JHao</li>
+                            <li><span>Tel：</span>13880321621</li>
+                            <li><span>Email：</span>for-JHao@outlook.com</li>
+                        </ul>
+                    </Footer>
                 </Layout>
             </Layout>
         </div>
