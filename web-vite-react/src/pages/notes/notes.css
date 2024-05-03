@@ -11,10 +11,9 @@
 .notesHeader {
     width: 100%;
     border-bottom: 4px solid #f56a6a;
-    margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .notesFooter {

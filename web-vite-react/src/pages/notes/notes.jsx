@@ -65,7 +65,7 @@ function NotesPannel() {
                     <Content style={contentStyle}>
                         <Display content={mdContent}></Display>
                     </Content>
-                    <Footer>
+                    <Footer style={{paddingTop:'10px',paddingBottom:'10px'}}>
                         <ul className="notesFooter">
                             <li><span>Author：</span>JHao</li>
                             <li><span>Tel：</span>13880321621</li>
