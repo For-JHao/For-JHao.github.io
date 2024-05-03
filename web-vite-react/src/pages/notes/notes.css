@@ -7,3 +7,29 @@
     overflow: auto;
 
 }
+
+.notesHeader {
+    width: 100%;
+    border-bottom: 4px solid #f56a6a;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.notesFooter {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.notesFooter>li>span{
+    display: block;
+}
+@media screen and (max-width:640px) {
+    .notesFooter{
+        display: block;
+    }
+    .notesFooter>li{
+        margin: 10px;
+    }
+}

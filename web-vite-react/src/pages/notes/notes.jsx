@@ -5,40 +5,19 @@ import { marked } from 'marked';
 import "./notes.css"
 
 import { theme, Layout } from 'antd';
-import { useState } from "react";
+import { useCallback , useState,memo } from "react";
+import { SmileOutlined } from '@ant-design/icons';
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const modules = import.meta.glob("../../../../myNote/note/learningNotes/*.md", {
-    query: '?raw',
-    import: 'default',
-})
-/** */
-console.log(modules)
-console.log(import.meta.env.BASE_URL)
-
 function readMdFiles(url) {
-    // fetch(url).then((response) => {
-    //     console.log(response)
-    //     return response.blob()})
-    // .then((data) => console.log(data));
-
-    const prefix = '../../../../myNote/note/learningNotes'
-
-    let xhr = new XMLHttpRequest()
-    console.log(prefix + url)
-    xhr.open('GET', prefix + url)
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            console.log(xhr)
-            let files = xhr.responseText
-            console.log(files)
-        }
-    }
-
-    xhr.send()
+    return fetch(url).then((response) => {
+        return response.text()
+    })
 }
 
+
+const NotesMenuMO=memo(NotesMenu)
 
 function NotesPannel() {
 
@@ -64,27 +43,35 @@ function NotesPannel() {
 
     let [mdContent, setMdContent] = useState('')
 
-    function loadMdContent(obj) {
-        // console.log(obj)
-        // console.log(obj.item.props.path)
-        // modules[obj.item.props.path]().then(res => {
-        //     setMdContent(marked.parse(res))
-        // })
-        readMdFiles(obj.item.props.path)
-    }
+    const loadMdContent=useCallback((obj) =>{
+        readMdFiles(obj.item.props.path).then(file => {
+            setMdContent(marked.parse(file))
+        })
+    },[])
 
     return (
         <div className="notesPanel">
             <Layout style={layoutStyle}>
                 <Sider theme='light' breakpoint="md" className="menuSider">
-                    <NotesMenu onMenuClick={loadMdContent} />
+                    <NotesMenuMO onMenuClick={loadMdContent} />
                 </Sider>
                 <Layout>
-                    <Header style={headerStyle}>Header</Header>
+                    <Header style={headerStyle} className="notesHeader">
+                        <div>JHao</div>
+                        <div >
+                            <SmileOutlined />
+                        </div>
+                    </Header>
                     <Content style={contentStyle}>
                         <Display content={mdContent}></Display>
                     </Content>
-                    <Footer>Footer</Footer>
+                    <Footer style={{paddingTop:'10px',paddingBottom:'10px'}}>
+                        <ul className="notesFooter">
+                            <li><span>Author：</span>JHao</li>
+                            <li><span>Tel：</span>13880321621</li>
+                            <li><span>Email：</span>for-JHao@outlook.com</li>
+                        </ul>
+                    </Footer>
                 </Layout>
             </Layout>
         </div>

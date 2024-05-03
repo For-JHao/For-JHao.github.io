@@ -8,11 +8,13 @@ GitHub page只提供静态页面功能。
 
 **指定分支和文件夹**：
 
-简单直接，github会自动寻找在指定路径（只能是分支根目录”/“或者"/docs"）顶层的index.html；
+简单直接，github会自动寻找在**仓库**指定路径（只能是分支根目录”/“或者"/docs"）顶层的index.html；
 
 **利用工作流：**
 
 适合利用框架（vue，react等）搭建的项目，可以通过github action配置打包和部署；
+
+通过GitHub action将资源发布到**github page环境**（可在setting下的environment查看），而不是直接部署的仓库文件；
 
 工作流需要编写yml文件，重点是根据项目情况，比如执行install和build任务，将生成的静态文件交给预置工作流[`actions/upload-pages-artifact`](https://github.com/actions/upload-pages-artifact) 。该工作流会按一定规则打包好静态文件，并上传到github的工作环境，再供接下来的 [`actions/deploy-pages`](https://github.com/actions/deploy-pages)流程调用，部署github page。这两个工作流都是github官方认证并建议使用的预置工作流，配套使用。
 
