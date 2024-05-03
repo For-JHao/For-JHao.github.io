@@ -9,12 +9,13 @@ This is my Blog project for recording my notes.</br>
 There are two projects for it.
 
 ## vite-react
-This is the newer one for reconstructing old version with react.
-Improvemets:
-Read markdown fileList and render menu automatically now by node script.
-Component-based development, use-friendly with react and Ant design. 
-Optimise package with vite, re-use all the notes markdown and convert them by marked.js.
-Use github action to auto build and deploy following branches main&vite-react.
+This is the newer one for reconstructing old version with react. </br>
+</br>
+Improvemets: </br>
+Read markdown fileList and render menu automatically now by node script. </br>
+Component-based development, use-friendly with react and Ant design.  </br>
+Optimise package with vite, re-use all the notes markdown and convert them by marked.js. </br>
+Use github action to auto build and deploy following branches main&vite-react. </br>
 
 ## static file（old version）
 There are two main parts: **Welcome** and **Notes**.</br>
