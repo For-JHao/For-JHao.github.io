@@ -6,6 +6,7 @@ html,body,.wrapper{
 
 }
 
-.wrapper{
-  background-image: url(./assets/beach.jpg);
+.wrapper>*{
+  /* background-image: url(./assets/beach.jpg); */
+  position: relative;
 }
