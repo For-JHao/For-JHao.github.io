@@ -5,11 +5,14 @@ import './App.css'
 import Intro from './pages/home/intro'
 import Notes from './pages/notes/notes'
 
-function App() {
+import WrapperBg from './pages/wrapper'
 
+
+function App() {
 
   return (
     <div className='wrapper'>
+      <WrapperBg />
       <Routes>
         <Route path="/" element={<Intro />} />
         <Route path='/home' element={<Intro></Intro>}></Route>
