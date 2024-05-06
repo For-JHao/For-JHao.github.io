@@ -5,7 +5,7 @@ import noteList from '/notesList.json'
 
 let initKey = 0
 
-function menuItemPack(labelArr=[], prePath = '') {
+function menuItemPack(labelArr = [], prePath = '') {
     //item eg. { key: 1, label: 'test1',children:[{key:12,label:'test12'}] },
 
     let label = labelArr.shift()
@@ -17,6 +17,12 @@ function menuItemPack(labelArr=[], prePath = '') {
 
 }
 
+function injectFolder(parentlist, item) {
+    let index = parentlist.findLastIndex(el => Object.prototype.hasOwnProperty.call(el, "children"))
+    const insert = index === -1 ? 0 : index+1
+    parentlist.splice(insert, 0, item)
+}
+
 function getMenuList(listItem) {
 
     let list = []
@@ -26,22 +32,22 @@ function getMenuList(listItem) {
         //eg. windows:'\\', ubuntu:'/'
         let pathArr = path.split('\\')
 
-        let temList = list, target = null, prePath=''
+        let temList = list, target = null, prePath = ''
         while (pathArr.length >= 2) {
             //find the menu should be injected
             target = temList.find(el => el.label === pathArr[0])
             if (target === undefined) break
             else {
                 temList = target.children
-                prePath=target.path
+                prePath = target.path
                 pathArr.shift()
             }
         }
 
         let newMenu = menuItemPack(pathArr, prePath)
 
-        //sort. make sure folders on the menu top
-        newMenu.children ? temList.unshift(newMenu) : temList.push(newMenu)
+        //make sure folders on the menu top, and keep the original notesList sort
+        newMenu.children ? injectFolder(temList, newMenu) : temList.push(newMenu)
 
     }
 
@@ -54,9 +60,9 @@ NotesMenu.propTypes = {
 
 export default function NotesMenu({ onMenuClick }) {
 
-    const homeBtStyle={
-        height:'40px',
-        display:'flex',
+    const homeBtStyle = {
+        height: '40px',
+        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     }
