@@ -9,3 +9,11 @@ html,body,.wrapper{
 .wrapper{
   background-image: url(./assets/beach.jpg);
 }
+
+.wrapper>*{
+  position: relative;
+}
+
+.wrapper>div:first-child{
+  z-index: 99;
+}
