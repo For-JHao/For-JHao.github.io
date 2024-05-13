@@ -12,12 +12,12 @@ function App() {
 
   return (
     <div className='wrapper'>
-      <WrapperBg />
       <Routes>
         <Route path="/" element={<Intro />} />
         <Route path='/home' element={<Intro></Intro>}></Route>
         <Route path='/notes' element={<Notes></Notes>}></Route>
       </Routes>
+      <WrapperBg />
     </div>
   )
 }
