@@ -15,11 +15,15 @@ call()和bind()的区别在于，call()会立即执行，bind()会返回一个�
             delete _this.fn
         }
 
+		//bind()
+		//1.绑定this，返回新函数
+		//2.支持多次绑定。参数会缓存，但只会在第一次绑定的this上执行
         Function.prototype.myBind=function(obj,...args){
             let _this=this
-            return function(){
+            return function(...args2){
+                //多次绑定最后相当于在递归执行该部分
                 obj.fn=_this
-                obj.fn(...args)
+                obj.fn(...args,...args2)
                 delete obj.fn
             }
         }
