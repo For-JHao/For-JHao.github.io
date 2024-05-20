@@ -16,7 +16,9 @@ JavaScript执行过程可以分为大体三个阶段：
 
 ## 解析 Parsing
 
-识别源代码中的关键字、操作符、变量名等，将其转换为抽象语法树（AST）；
+- 识别源代码中的关键字、操作符、变量名等，将其转换为抽象语法树（AST）；
+
+- 确定作用域；
 
 **Lazy Parsing(延迟解析)机制** ：针对函数，js第一次运行时引擎只会解析顶层代码，遇到函数会跳过内部代码（不会生成对应AST，同样也不会参加编译），以此加快运行速度。 
 
@@ -72,8 +74,14 @@ high-level代码以机器码形式缓存；
 
 现代所有对js的垃圾回收机制都是基于mark-and-sweep
 
+
+
+
+
 *参考*：
 
-*[V8 JavaScript engine](https://v8.dev/)*
+*[V8 JavaScript engine](https://v8.dev/)*；
+
+https://juejin.cn/post/7221793823704514620；
 
 *[JavaScript深入浅出第4课：V8引擎是如何工作的？ | 寒雁Talk (kiwenlau.com)](https://kiwenlau.com/2019/07/16/how-does-v8-work/)*
