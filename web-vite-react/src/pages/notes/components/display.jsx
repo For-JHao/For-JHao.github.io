@@ -1,4 +1,4 @@
-import notesPageUrl from '/src/assets/dog.jpg'
+import notesPageUrl from '/src/assets/dog-s.jpg'
 
 const defaultStyle = {
     display: 'flex',

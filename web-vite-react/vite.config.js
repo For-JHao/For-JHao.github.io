@@ -5,5 +5,12 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   publicDir:'../myNote/note/learningNotes',
-  assetsInclude:['*.md']
+  assetsInclude:['*.md'],
+  build:{
+    rollupOptions:{
+      output:{
+        inlineDynamicImports:true
+      }
+    }
+  }
 })

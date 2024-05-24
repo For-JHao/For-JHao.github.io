@@ -1,5 +1,5 @@
 
-import bgImg from '../assets/beach.jpg'
+import bgImg from '../assets/beach-s.jpg'
 
 let config={
     "autoPlay": true,
