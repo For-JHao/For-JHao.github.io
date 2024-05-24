@@ -35,11 +35,6 @@ function NotesPannel() {
     const headerStyle = {
         background: colorBgContainer
     }
-    const contentStyle = {
-        paddingLeft: 50,
-        paddingRight: 50,
-        overflow: 'auto'
-    }
 
     let [mdContent, setMdContent] = useState('')
 
@@ -62,7 +57,7 @@ function NotesPannel() {
                             <SmileOutlined />
                         </div>
                     </Header>
-                    <Content style={contentStyle}>
+                    <Content className="ntoesContent">
                         <Display content={mdContent}></Display>
                     </Content>
                     <Footer style={{paddingTop:'10px',paddingBottom:'10px'}}>

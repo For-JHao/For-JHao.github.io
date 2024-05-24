@@ -16,6 +16,16 @@
     margin-bottom: 10px;
 }
 
+.ntoesContent{
+    padding-left: 50px;
+    padding-right: 50px;
+    overflow: auto;
+}
+
+.ntoesContent img{
+    width: 100%;
+}
+
 .notesFooter {
     list-style-type: none;
     padding: 0;
