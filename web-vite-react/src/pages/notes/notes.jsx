@@ -5,10 +5,10 @@ import { marked } from 'marked';
 import "./notes.css"
 
 import { theme, Layout } from 'antd';
-import { useCallback , useState,memo } from "react";
-import { SmileOutlined } from '@ant-design/icons';
+import { useCallback, useState, memo } from "react";
+import { GithubOutlined, RollbackOutlined } from '@ant-design/icons';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 function readMdFiles(url) {
     return fetch(url).then((response) => {
@@ -17,7 +17,8 @@ function readMdFiles(url) {
 }
 
 
-const NotesMenuMO=memo(NotesMenu)
+const NotesMenuMO = memo(NotesMenu)
+
 
 function NotesPannel() {
 
@@ -33,40 +34,41 @@ function NotesPannel() {
     }
 
     const headerStyle = {
-        background: colorBgContainer
+        background: colorBgContainer,
     }
 
     let [mdContent, setMdContent] = useState('')
 
-    const loadMdContent=useCallback((obj) =>{
+    //used for refreshing menu
+    let [menuLoadTrigger, setMenuLoadTrigger] = useState(0)
+
+    const loadMdContent = useCallback((obj) => {
         readMdFiles(obj.item.props.path).then(file => {
             setMdContent(marked.parse(file))
         })
-    },[])
+    }, [])
+
+    const backToNoteDefault = function () {
+        setMdContent('')
+        setMenuLoadTrigger(menuLoadTrigger+1)
+    }
 
     return (
         <div className="notesPanel">
             <Layout style={layoutStyle}>
                 <Sider theme='light' breakpoint="md" className="menuSider">
-                    <NotesMenuMO onMenuClick={loadMdContent} />
+                    <NotesMenuMO onMenuClick={loadMdContent} reload={menuLoadTrigger}/>
                 </Sider>
                 <Layout>
                     <Header style={headerStyle} className="notesHeader">
-                        <div>JHao</div>
-                        <div >
-                            <SmileOutlined />
+                        <div onClick={() => backToNoteDefault()}><RollbackOutlined className="icon" /></div>
+                        <div onClick={() => window.location = 'https://github.com/For-JHao/For-JHao.github.io'}>
+                            <GithubOutlined className="icon" />
                         </div>
                     </Header>
                     <Content className="ntoesContent">
                         <Display content={mdContent}></Display>
                     </Content>
-                    <Footer style={{paddingTop:'10px',paddingBottom:'10px'}}>
-                        <ul className="notesFooter">
-                            <li><span>Author：</span>JHao</li>
-                            <li><span>Tel：</span>13880321621</li>
-                            <li><span>Email：</span>for-JHao@outlook.com</li>
-                        </ul>
-                    </Footer>
                 </Layout>
             </Layout>
         </div>

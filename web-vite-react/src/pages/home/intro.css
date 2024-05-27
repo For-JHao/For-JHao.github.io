@@ -9,3 +9,20 @@
 .introTitle{
     padding-top: 200px;
 }
+
+.introLink{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.introLink>a{
+    font-size: larger;
+}
+
+
+.introLink>a:hover{
+    font-size: xx-large;
+    color: rgb(255 149 0);
+}
