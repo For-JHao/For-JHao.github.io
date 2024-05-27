@@ -1,5 +1,6 @@
 import { Menu } from 'antd';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 import noteList from '/notesList.json'
 
@@ -72,7 +73,7 @@ export default function NotesMenu({ onMenuClick }) {
     return (
         <>
             <div style={homeBtStyle}>
-                <a href='/'>Home Page</a>
+                <Link to='/'>Home Page</Link>
             </div>
             {/* 由于Ant Design的机制，Menu 会渲染两次 */}
             <Menu

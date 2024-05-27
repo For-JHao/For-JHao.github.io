@@ -5,7 +5,7 @@ import { marked } from 'marked';
 import "./notes.css"
 
 import { theme, Layout } from 'antd';
-import { useCallback, useState, memo } from "react";
+import { useCallback, useState, memo, useRef } from "react";
 import { GithubOutlined, RollbackOutlined } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
@@ -50,14 +50,19 @@ function NotesPannel() {
 
     const backToNoteDefault = function () {
         setMdContent('')
-        setMenuLoadTrigger(menuLoadTrigger+1)
+        setMenuLoadTrigger(menuLoadTrigger + 1)
+    }
+
+    const boxRef = useRef(null)
+    if (boxRef.current) {
+        boxRef.current.scrollTop = 0;
     }
 
     return (
         <div className="notesPanel">
             <Layout style={layoutStyle}>
                 <Sider theme='light' breakpoint="md" className="menuSider">
-                    <NotesMenuMO onMenuClick={loadMdContent} reload={menuLoadTrigger}/>
+                    <NotesMenuMO onMenuClick={loadMdContent} reload={menuLoadTrigger} />
                 </Sider>
                 <Layout>
                     <Header style={headerStyle} className="notesHeader">
@@ -66,7 +71,7 @@ function NotesPannel() {
                             <GithubOutlined className="icon" />
                         </div>
                     </Header>
-                    <Content className="ntoesContent">
+                    <Content className="ntoesContent" ref={boxRef}>
                         <Display content={mdContent}></Display>
                     </Content>
                 </Layout>
