@@ -111,8 +111,8 @@ next()会以**value**返回yield或者return表达式的值，next的参数会�
 
 ![image-20240529144656278](../img/async和await/image-20240529144656278.png)
 
-这只是简单模拟。实际v8引擎处理async/await也是基于将代码转换成promise链，且做了性能优化；
+这只是简单模拟。实际v8引擎处理async/await也是基于将代码转换成promise链，并做了性能优化；
 
 v8 async/await机制详细参考：https://v8.dev/blog/fast-async
 
-至于generator，则是通过解析语法树，根据yield划分各代码块生成状态机，同时维护一个执行指针位置和上下文匹配代码块，以此实现的代码暂停和恢复执行（协程思想的一种实现）；
+至于generator，则是通过解析语法树，根据yield划分各代码块生成状态机，同时维护一个执行指针位置和上下文以匹配代码块，以此实现的代码暂停和恢复执行（协程思想的一种实现）；
