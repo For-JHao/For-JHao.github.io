@@ -82,7 +82,7 @@ next()会以**value**返回yield或者return表达式的值，next的参数会�
             return 'done'
         }
 
-        demo().then((data) => { console.log('async end::', data) })
+        //demo().then((data) => { console.log('async end::', data) })
 
         //模拟
         function* demo2() {
