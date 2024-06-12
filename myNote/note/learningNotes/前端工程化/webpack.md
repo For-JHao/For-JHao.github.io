@@ -29,6 +29,6 @@
 
 总体流程就是：
 
-创建complier对象，执行run()，从entry进入，将每个js（包括使用到的其他资源）转换为对应的module对象，module会交由loader进行编译转换，同时这个过程也会生成对应的ast（语法树），babel也就是这个时候处理源码。当前module处理完后，如果存在依赖（判断js文本有require或者import语句），就递归处理该依赖（生成对应module）。
+创建complier对象，执行run()，从entry进入，将每个js（包括使用到的其他资源）转换为对应的module对象，module会交由loader进行编译转换，同时这个过程也会生成对应的ast（语法树），babel也就是这个时候处理源码。当前module处理完后，如果存在依赖（判断js文本有require或者import），就递归处理该依赖（生成对应module）。
 
 所有依赖都处理成了module后，开始打包。此时分析之前递归的依赖关系，把mudule划分到不同的chunk，一个chunk就对应一个输出文件，生成一个chunk集合（比如，从entry import的多个js为一个chunk，动态导入的为一个chunk）。最后，根据配置调用plugin，整合每个chunk的资源，输出打包后的新文件。
