@@ -149,3 +149,28 @@ promise.then()的异步执行实际通过回调函数的方式实现；
 2. > 参考
    > 
    > https://shq-splendid.gitee.io/2021/06/02/JavaScript%E5%BC%82%E6%AD%A5/
+
+
+
+## promise.all实现
+
+遍历原始promise数组，给每个promise注册then回调将结果存放到新数组对应索引位置，并在每次then回调检测剩余数量。
+
+```js
+function myPromiseALl(arr){
+    let result=[]
+    return new Promise((res,rej)=>{
+        let count=arr.length
+        arr.forEach((el,index) => {
+            Promise.resolve(el).then((data)=>{
+                result[index]=data
+                count--
+                if(count===0) res(result)
+            },(error)=>{
+                rej(error)
+            })
+        });
+    })
+}
+```
+
