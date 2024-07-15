@@ -57,9 +57,11 @@ version ：特定版本
 
 **初始化npm项目**：`npm init`；实际就是生成一个package.json文件；
 
+**配置npm仓库地址**：全局配置`npm config set registry xxxx`
+
 **发布npm包**：`npm publish`
 
-需要在package.json 配置发布地址：
+通常会采用全局配置的地址，也可以在package.json 额外配置发布地址（比如私服）：
 
 ```json
 "publishConfig" : {
@@ -109,3 +111,11 @@ npm文档：https://nodejs.cn/npm/about-npm/
 - 更节省空间。所有依赖统一存放，项目共享，而不是npm那样一个项目存放一个依赖库。
 
 - 安装速度快，基于更好的依赖解析和存储管理，相比yarn和npm具有极快的安装速度。yarn默认情况下是从缓存copy依赖包到项目依赖，而npm每次都重新下载。
+
+
+
+# node版本管理
+
+## nvm
+
+通过nvm可以方便的切换不同版本的node。因为npm和node集成，切换node版本也会切换不同版本的npm。
