@@ -24,6 +24,26 @@ executor始终是同步执行的，而**then**的调用始终是异步执行的�
 
 then()中经由onRejectedCb正常处理掉rejected的Promise后，then()本身会返回fulfilled的Promise（除非有报错）；
 
+then()的链式调用，会在**前状态兑换时**，**推入微任务队列**（此时then本身还没有执行，所以then自己的状态还没有兑换，下一个then链还不会推入微任务）。
+
+所以：
+
+```js
+new Promise((res,rej)=>{
+    res()
+}).then(() =>console.log(12)).then(() => console.log(13)).then(() => console.log(14))
+new Promise((res,rej)=>{
+    res()
+}).then(() =>console.log(22)).then(() => console.log(23)).then(() => console.log(24))
+setTimeout(()=>{
+    console.log('time out')
+},0)
+//打印顺序为：12，22，13，23，14，24，time out
+//注意，宏任务只有在当前微任务队列清空才执行
+```
+
+
+
 
 
 - **catch()**
