@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 import noteList from '/notesList.json'
+import style from './menu.module.css';
 
 let initKey = 0
 
@@ -20,7 +21,7 @@ function menuItemPack(labelArr = [], prePath = '') {
 
 function injectFolder(parentlist, item) {
     let index = parentlist.findLastIndex(el => Object.prototype.hasOwnProperty.call(el, "children"))
-    const insert = index === -1 ? 0 : index+1
+    const insert = index === -1 ? 0 : index + 1
     parentlist.splice(insert, 0, item)
 }
 
@@ -80,6 +81,7 @@ export default function NotesMenu({ onMenuClick }) {
                 mode="inline"
                 items={items}
                 onClick={onMenuClick}
+                className={style.notesMenu}
             />
         </>
     )

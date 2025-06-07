@@ -5,7 +5,10 @@
 
 .menuSider {
     overflow: auto;
-
+    scrollbar-width: none; /* Firefox */
+}
+.menuSider::-webkit-scrollbar {
+  display: none;  /* Chrome、Safari 和新版 Edge */
 }
 
 .notesHeader {
